@@ -2,15 +2,19 @@
 layout: project
 type: project
 image: img/f1tenth1.HEIC 
-title: " Wall Following for F1TENTH Autonomous Race Car"
+title: " Wall Following and Collision Avoidance"
 date: 2023
 published: true
 labels:
   - Embedded Systems
   - Nvdia Jetson
   - ROS
-summary: "AS the titile suggests, my team and I implemented Wall Following System for F1TENTH Race Car"
+  - Autonomous Driving
+summary: "My team and I implemented Wall Following and Collision Avoidance Algorithms for F1TENTH Race Car"
 ---
+My team and I at the Center for Embedded Systems for Critical Applications at Virginia Tech designed and implemented wall following node and collision avoidance node for F!TENTH Race Car.
+<h3> WALL FOLLOWER </h3>
+We first started out with implementing the wall following algorithm. It's key features are as follows: 
 <ul>
 <li> The wall follow node implements a simple PID controller for the car to autonomously drive forward while staying centered. </li>
 <li> In the context of our car, the desired distance to the wall should be our set point for our controller, which means our error is the difference between the desired and actual distance to the wall. </li>
@@ -24,9 +28,22 @@ summary: "AS the titile suggests, my team and I implemented Wall Following Syste
 <li> Otherwise, the speed should be 0.5 meters per second. </li>
 </ul>
 </ul>
-
+The result is that we now have a car that can dynamically follow a set path. The video below shows is an example of the path.
 <div class="text-center p-4">
   <img width="200px" src="../img/f1tenth1.gif" class="img-thumbnail" >
+</div>
+
+<h3> COLLISON AVOIDANCE </h3>
+Excited by the results of the previous algorithm, the team decided to extend the program. We set out to build a system that could not only follow a path, but also navigate it based on dynamically changing conditions.
+
+Sensors such as lidar, cameras, and radar are used to perceive the environment and gather data about the surroundings. Lidar sensors provide a 3D point cloud representation of the environment, while cameras and radar can provide additional information about objects, distances, and velocities.
+
+Custom Object detection algorithms are employed to identify and track objects in the sensor data. This involves using concepts computer vision, deep learning, or sensor fusion to detect and track other vehicles, pedestrians, or obstacles in real-time.
+
+The attached video shows our team's success in achieving this!
+
+<div class="text-center p-4">
+  <img width="200px" src="../img/f1tenth2.gif" class="img-thumbnail" >
 </div>
 
 Here is a sample function that I have been authorized to share :
@@ -51,3 +68,5 @@ Here is a sample function that I have been authorized to share :
         return scan_msg->ranges[i];
     }
  ```
+ 
+ For more info about F1TENTH, visit <a href = "https://f1tenth.org/"> https://f1tenth.org/ </a>
