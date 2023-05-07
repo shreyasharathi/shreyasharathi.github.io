@@ -1,7 +1,7 @@
 ---
 layout: project
 type: project
-image: img/cotton/cotton-square.png
+image: img/cotton/freertos.png
 title: "Implementation of Overload Scheduling Algorithms in FreeRTOS"
 date: 2014
 published: true
@@ -11,7 +11,7 @@ labels:
 summary: "Implementation of Rate Monotonic Scheduling and Deadline Monotonic Scheduling Algorithms in FreeRTOS"
 ---
 
-<img class="img-fluid" src="../img/cotton/cotton-header.png">
+<img class="img-fluid" src="../img/cotton/freertos.png">
 
 Designed a custom scheduler to implement the RMS and DMS (pre-emptive) scheduling algorithm in C based on FreeRTOS.
 
