@@ -42,7 +42,7 @@ For this project, I was the lead programmer who was responsible for programming 
 <li> Compact and efficient. </li>
   <li> Easy installation. </li>
 
-<ul>
+</ul>
 
 We have deployed this sytem in 22 farms across Thanjavur, India.
 
