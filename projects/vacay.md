@@ -23,4 +23,4 @@ Smart agriculture using embedded system-based automated irrigation management is
 
 Published in: 2021 Innovations in Power and Advanced Computing Technologies (i-PACT). 
 
-Refer : <a https://ieeexplore.ieee.org/document/9696512> </a>
+Refer : <a href = "https://ieeexplore.ieee.org/document/9696512"> </a>
