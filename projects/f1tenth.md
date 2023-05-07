@@ -1,7 +1,7 @@
 ---
 layout: project
 type: project
-image: img/micromouse/timer2.png
+image: img/f1tenth.HEIC
 title: " Wall Following for F1TENTH Autonomous Race Car"
 date: 2023
 published: true
@@ -25,6 +25,8 @@ summary: "AS the titile suggests, my team and I implemented Wall Following Syste
 </ul>
 </ul>
 
-
+<div class="text-center p-4">
+  <img width="200px" src="../img/f1tenth1.gif" class="img-thumbnail" >
+</div>
 
 
