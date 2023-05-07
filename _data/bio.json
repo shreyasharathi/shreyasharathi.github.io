@@ -6,7 +6,7 @@
     "email": "shreyasharathi@vt.edu",
     "phone": "412-482-0336",
     "website": "https://shreyasharathi.github.io",
-    "summary": "I am pursuing M.S. in Computer Engineering in the Department of Electrical and Computer Engineering at Virginia Tech. I expect to graduate in Spring, 2024.",
+    "summary": "I am pursuing M.S. in Computer Engineering in the Department of Electrical and Computer Engineering at Virginia Tech. I expect to graduate in Spring, 2024. I am currently a research assistant at the Center for Embedded Systems for Critical Applications working on incraesing the saftey of F1TENTH autonomous Race Car",
     "location": { "address": "815 Claytor Square", "postalCode": "24060", "city": "Blacksburg", "countryCode": "USA", "region": "Virginia" },
     "profiles": [
       { "network": "github", "username": "shreyasharathi", "url": "http://github.com/shreyasharathi" },
@@ -22,11 +22,15 @@
   "skills": [
     {
       "name": "Languages and Frameworks",
-      "keywords": [ "C", "C++", "Java", "Javascript", "Assembly", "Common Lisp" ]
+      "keywords": [ "C", "C++", "Embedded C", "Python", "Assembly", "RISC-V" ]
     },
     {
-      "name": "Toolsets/OS",
-      "keywords": [ "MacOS", "Ubuntu", "Git/GitHub", "g++", "TI LaunchPad" ]
+      "name": "Protocols",
+      "keywords": [ "I2C", "SPI", "UART", "USB", "BLE" ]
+    },
+    {
+      "name": "Microcontrollers and Boards",
+      "keywords": [ "Arduino", "Raspberry Pi", "Altera", "Xilinx", "STM32" ]
     }
   ],
   "education": [
@@ -42,47 +46,41 @@
                   "Real Time Systems",
                   "Cyber-Physical Systems"
       ]
+    },
+        {
+      "institution": "SASTRA Deemed University, India",
+      "area": "Electronics and Commmunication Engineering",
+      "studyType": "B. Tech.",
+      "startDate": "2018-08-23",
+      "endDate": "2022-05-15",
+      "courses": [ ": Microprocessors and Microcontrollers",
+                  "Embedded Systems Processing and Architectures",
+                  "Digital Signal Processing",
+                  "Digital VLSI Design",
+                  "Digital System Design"
+      ]
     }
   ],
-  "volunteer": [
+  "research": [
     {
-      "organization": "Center for Renewable Energy and Island Sustainability",
-      "website": "http://manoa.hawaii.edu/reis",
+      "organization": "Center for Embedded Systems for Critical Applications",
+      "website": "https://vtechworks.lib.vt.edu/handle/10919/77458",
       "position": "Software Developer",
-      "startDate": "2016-01-01",
+      "startDate": "2023-01-24",
       "endDate": "Present",
-      "summary": "Lead developer for weather sensing project",
+      "summary": "Junior developer for F1TENTH Autonomous Race Car",
       "highlights": [
-        "Design firmware for distributed weather sensor network",
-        "Maintain custom data collection and storage infrastructure"
-      ]
-    },
-    {
-      "organization": "",
-      "website": "",
-      "position": "Professional organization involvement",
-      "startDate": "",
-      "endDate": "",
-      "summary": "",
-      "highlights": [
-        "Chair, ACM Manoa, 2016-Present",
-        "Member, IEEE Student Branch, 2014-Present",
-        "Webmaster/IT Officer, IEEE Student Branch, UH Manoa, 2012-2013"
+        "Design collision avoidance framework for an autonomous vehicle based on F1TENTH libraries",
+        "Working towards increasing the safety of autonomous race cars"
       ]
     }
   ],
   "awards": [
     {
-      "title": "B+ Scholarship",
-      "date": "2013-Present",
-      "awarder": "State of Hawaii",
-      "summary": "Scholarships awarded to incoming freshmen and continuing students who complete a rigorous high school curriculum with a minimum overall GPA of 3.0 at a Hawai'i public school."
-    },
-    {
-      "title": "First place",
-      "date": "2015",
-      "awarder": "University of Hawaii Micromouse Competition",
-      "summary": "My team won first place in 2015.  See my portfolio site for more details."
+      "title": "Best Outgoing Student",
+      "date": "2022",
+      "awarder": "School of Electrical and Electronics Engineering, SASTRA Deemed University",
+      "summary": "Awarded the best graduating student by the department"
     }
   ],
   "references": [
