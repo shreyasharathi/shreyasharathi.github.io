@@ -12,7 +12,7 @@ labels:
 summary: "Implemented Wall Following and Collision Avoidance System"
 ---
 
-<div class="ratio ratio-4x3 my-4">
+<div class="ratio ratio-4x3 width="320" height="240" my-4">
   <iframe src="https://youtube.com/shorts/v_jN9idFuTY" 
           title="Wall Following" 
           allowfullscreen>
