@@ -18,7 +18,7 @@ summary: "Published in: 2021 Innovations in Power and Advanced Computing Technol
   <img width="200px" src="../img/micromouse/timer3.png" class="img-thumbnail" >
 </div>
 
-Smart agriculture using embedded system-based au- tomated irrigation management is the most prominent approach and will be pivotal in revolutionizing the agricultural domain. The excess as well as inadequate irrigation damages the crops and inflicts great loss to the farmers. This paper proposes a small-scaled embedded system for the application of an irrigation system to provide a sustainable environment for the crops by implementing automation.
+Smart agriculture using embedded system-based automated irrigation management is the most prominent approach and will be pivotal in revolutionizing the agricultural domain. The excess as well as inadequate irrigation damages the crops and inflicts great loss to the farmers. This paper proposes a small-scaled embedded system for the application of an irrigation system to provide a sustainable environment for the crops by implementing automation.
 
 Published in: 2021 Innovations in Power and Advanced Computing Technologies (i-PACT). 
 Refer : <a> https://ieeexplore.ieee.org/document/9696512 </a>
