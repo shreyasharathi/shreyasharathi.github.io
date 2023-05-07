@@ -30,7 +30,7 @@ Smart agriculture using embedded system-based automated irrigation management is
 
 <h3> Algorithm-Process Flow </h3>
 Step 1: Input
-- The sensor array unit senses the conductivity and sends the same in analog format to the sensor interface.<br>
+- The sensor array unit senses the conductivity and sends the same in analog format to the sensor interface. <br>
 
 Step 2: Forwarding the input
 - The interface uses a comparator to get the digital equivalent of the obtained analog data.<br>
