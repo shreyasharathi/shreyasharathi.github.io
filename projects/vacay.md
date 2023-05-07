@@ -12,7 +12,6 @@ labels:
   - GitHub
 summary: "A responsive web application for travel planning that my team developed in ICS 415."
 ---
-
 							<h6 style="color:black">Automated vehicle research platform</h6>
 							<ul>
 								<div class="row">
