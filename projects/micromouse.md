@@ -33,7 +33,7 @@ For this project, I was the lead programmer who was responsible for programming 
 <li> An external switch is used to switch between the two modes in-built to control either a 3-phase irrigation motor or a 1-phase appliance. </li>
 <ul>
 
-<h3> Features <h3>
+<h3> Features </h3>
 <ul>
 <li> Three modes of control: Can be operated both automatically and manually. </li>
 <li> Manual override is provided for quick control and debugging of the system. </li>
