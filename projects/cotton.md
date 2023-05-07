@@ -48,6 +48,14 @@ Key features of DMS:
 - If a job executes for more than its worst-case execution time (i.e., an execution overrun occurs), it is suspended until its next release time. Again, conceptually, this overrun job is dropped
 - xExtended_TCB is used to help with maintaining a list of per-task parameters.
 
+<div class="ratio ratio-4x3 my-4">
+  <iframe src="../img/wall_following.mp4" 
+          title="Overview of Hackystat" 
+          allowfullscreen>
+  </iframe>
+</div>
+
+
 </pre>
 
 <hr>
