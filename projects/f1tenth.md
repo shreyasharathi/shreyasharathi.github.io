@@ -1,7 +1,7 @@
 ---
 layout: project
 type: project
-image: img/f1tenth.HEIC
+image: img/f1tenth1.HEIC 
 title: " Wall Following for F1TENTH Autonomous Race Car"
 date: 2023
 published: true
@@ -29,4 +29,25 @@ summary: "AS the titile suggests, my team and I implemented Wall Following Syste
   <img width="200px" src="../img/f1tenth1.gif" class="img-thumbnail" >
 </div>
 
+Here is a sample function that I have been authorized to share :
 
+```python
+    double get_range(const sensor_msgs::msg::LaserScan::ConstSharedPtr scan_msg, double angle)
+    {
+        /*
+        Simple helper to return the corresponding range measurement at a given angle. Make sure you take care of NaNs and infs.
+
+        Args:
+            range_data: single range array from the LiDAR
+            angle: between angle_min and angle_max of the LiDAR in radians
+
+        Returns:
+            range: range measurement in meters at the given angle
+        */
+
+        assert(angle >= scan_msg->angle_min && angle <= scan_msg->angle_max); // Angle must be within range
+        int i = (angle - scan_msg->angle_min) / (scan_msg->angle_increment); // index i of closest angle
+        if (std::isnan(scan_msg->ranges[i]) || scan_msg->ranges[i] > scan_msg->range_max) return scan_msg->range_max; // In case of NaNs and infinity, just return the maximum of the scan message
+        return scan_msg->ranges[i];
+    }
+ ```
