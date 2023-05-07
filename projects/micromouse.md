@@ -9,7 +9,7 @@ labels:
   - Embedded Systems
   - Arduino
   - C++
-summary: "My team designed and developed a system to eliminate the need to perform the redundant task of controlling the motor irrigation system.."
+summary: "My team designed and developed a system to eliminate the need to perform the redundant task of controlling the motor irrigation system."
 ---
 
 <div class="text-center p-4">
@@ -24,22 +24,25 @@ For this project, I was the lead programmer who was responsible for programming 
 - GSM was used to allow remote access to the system that improves the overall accessibility.
 
 <h3>Specifications and Methodology</h3>
+
 <ul>
-<li> The microcontroller used for controlling the operations is the Arduino Uno. It is a low-cost microcontroller that operates at 5V and has 2kb flash memory. </li>
-<li> The RTC 3231 Module was interfaced with the Arduino using <RTC3231.h> module. The time is loaded into the RTC at compile time and is maintained even at the loss of power using the cell battery. The RTC module contains two interrupts that allow for up to two alarms, these were programmed into the microcontroller for providing a soft interrupt. RTC is responsible for maintaining the precision of the time. </li>
-<li> The 16x2 LCD module was interfaced with the Arduino using the <LCD.h> in-built module and was programmed to display the RTC date and time. </li>
-<li> A simple 5 V relay is used to perform a switching check to control the motor when an alarm interrupt is raised. The conventional LCD wiring was replaced with the I2C Serial interface that allowed for a simple wiring setup and maximum usage of the Arduino’s serial communication. </li>
-<li> GSM is used to remotely control the product and achieve a remote-less system. With the inclusion of GSM, the user can control the irrigation system dynamically, and turn the system on or off using a mobile phone. </li>
-<li> An external switch is used to switch between the two modes in-built to control either a 3-phase irrigation motor or a 1-phase appliance. </li>
+  
+  <li> The microcontroller used for controlling the operations is the Arduino Uno. It is a low-cost microcontroller that operates at 5V and has 2kb flash memory. </li>
+  <li> The RTC 3231 Module was interfaced with the Arduino using <RTC3231.h> module. The time is loaded into the RTC at compile time and is maintained even at the loss of  power using the cell battery. The RTC module contains two interrupts that allow for up to two alarms, these were programmed into the microcontroller for providing a soft interrupt. RTC is responsible for maintaining the precision of the time. </li>
+  <li> The 16x2 LCD module was interfaced with the Arduino using the <LCD.h> in-built module and was programmed to display the RTC date and time. </li>
+  <li> A simple 5 V relay is used to perform a switching check to control the motor when an alarm interrupt is raised. The conventional LCD wiring was replaced with the I2C  Serial interface that allowed for a simple wiring setup and maximum usage of the Arduino’s serial communication. </li>
+  <li> GSM is used to remotely control the product and achieve a remote-less system. With the inclusion of GSM, the user can control the irrigation system dynamically, and turn the system on or off using a mobile phone. </li>
+  <li> An external switch is used to switch between the two modes in-built to control either a 3-phase irrigation motor or a 1-phase appliance. </li>
 </ul>
 
 <h3> Features </h3>
+
 <ul>
-<li> Three modes of control: Can be operated both automatically and manually. </li>
-<li> Manual override is provided for quick control and debugging of the system. </li>
-<li> Clear User Interface: Easy to operate. </li> 
-<li> Cost-effective. </li>
-<li> Compact and efficient. </li>
+  <li> Three modes of control: Can be operated both automatically and manually. </li>
+  <li> Manual override is provided for quick control and debugging of the system. </li>
+  <li> Clear User Interface: Easy to operate. </li> 
+  <li> Cost-effective. </li>
+  <li> Compact and efficient. </li>
   <li> Easy installation. </li>
 
 </ul>
