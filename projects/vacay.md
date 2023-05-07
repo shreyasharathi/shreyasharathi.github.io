@@ -2,17 +2,23 @@
 layout: project
 type: project
 image: img/vacay/f1tenth1.HEIC  
-title: "Vacay"
-date: 2022
+title: "Embedded System Based Solution for Ailment of Irrigation in Agriculture"
+date: 2021
 published: true
 labels:
-  - J
-  - Meteor
-  - MongoDB
-  - GitHub
-summary: "A responsive web application for travel planning that my team developed in ICS 415."
+  - Embedded Systems
+  - Smart Agriculture
+  - Irrigation
+  - Automation
+summary: "Published in: 2021 Innovations in Power and Advanced Computing Technologies (i-PACT)"
 ---
-<video width="320" height="240" autoplay>
-  <source src="img/vacay/collision_avoidance.mp4" type="video/mp4">
-Your browser does not support the video tag.
-</video>
+
+<div class="text-center p-4">
+  <img width="200px" src="../img/micromouse/timer1.png" class="img-thumbnail" >
+  <img width="200px" src="../img/micromouse/timer3.png" class="img-thumbnail" >
+</div>
+
+Smart agriculture using embedded system-based au- tomated irrigation management is the most prominent approach and will be pivotal in revolutionizing the agricultural domain. The excess as well as inadequate irrigation damages the crops and inflicts great loss to the farmers. This paper proposes a small-scaled embedded system for the application of an irrigation system to provide a sustainable environment for the crops by implementing automation.
+
+Published in: 2021 Innovations in Power and Advanced Computing Technologies (i-PACT). 
+Refer : <a> https://ieeexplore.ieee.org/document/9696512 </a>
