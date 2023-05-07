@@ -1,7 +1,7 @@
 ---
 layout: project
 type: project
-image: img/vacay/paper1.png  
+image: img/vacay/paper1.jpg  
 title: "Embedded System Based Solution for Ailment of Irrigation in Agriculture"
 date: 2021
 published: true
@@ -14,8 +14,8 @@ summary: "Published in: 2021 Innovations in Power and Advanced Computing Technol
 ---
 
 <div class="text-center p-4">
-  <img width="200px" src="../img/micromouse/paper1.png" class="img-thumbnail" >
-  <img width="200px" src="../img/micromouse/paper2.png" class="img-thumbnail" >
+  <img width="200px" src="../img/micromouse/paper1.jpg" class="img-thumbnail" >
+  <img width="200px" src="../img/micromouse/paper2.jpg" class="img-thumbnail" >
   <img width="200px" src="../img/micromouse/paper3.png" class="img-thumbnail" >
 </div>
 
