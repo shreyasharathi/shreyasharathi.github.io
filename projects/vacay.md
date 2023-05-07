@@ -30,20 +30,24 @@ Smart agriculture using embedded system-based automated irrigation management is
 
 <h3> Algorithm-Process Flow </h3>
 Step 1: Input
-- The sensor array unit senses the conductivity and sends the same in analog format to the sensor interface.
+- The sensor array unit senses the conductivity and sends the same in analog format to the sensor interface.<br>
+
 Step 2: Forwarding the input
-- The interface uses a comparator to get the digital equivalent of the obtained analog data.
-- The digital data is sent to the processing unit.
+- The interface uses a comparator to get the digital equivalent of the obtained analog data.<br>
+- The digital data is sent to the processing unit.<br>
+
 Step 3: Comparison and decision making
-- The processing unit or control unit uses the received data and produces the average moisture level in the soil.
-- The average value is compared with the threshold value, thus deciding if the available moisture is sufficient.
-- If insufficient, then a signal is passed to the relay to drive the pump till the water content rises above the set threshold.
+- The processing unit or control unit uses the received data and produces the average moisture level in the soil. <br>
+- The average value is compared with the threshold value, thus deciding if the available moisture is sufficient. <br>
+- If insufficient, then a signal is passed to the relay to drive the pump till the water content rises above the set threshold.<br>
+
 Step 4: Output
-- The output panel, in this case, the Arduino IDE serial monitor, displays the status of each sensor in the array as well as the motor in real-time.
-- This allows for overall supervision of the system when needed and also the overall  performance  of the system over a time period.
-- From ThingSpeak, the IFTTT API send an email notification to the user in case the water level is below/above the set threshold.
+- The output panel, in this case, the Arduino IDE serial monitor, displays the status of each sensor in the array as well as the motor in real-time. <br>
+- This allows for overall supervision of the system when needed and also the overall  performance  of the system over a time period.<br>
+- From ThingSpeak, the IFTTT API send an email notification to the user in case the water level is below/above the set threshold.<br>
 
 Co-Authored with : Kaushik Lakshmiramanan, Ramya Vijay, Nithya Chidambaram.
+
 Published in: 2021 Innovations in Power and Advanced Computing Technologies (i-PACT). 
 
 Refer : <a href = "https://ieeexplore.ieee.org/document/9696512"> ieeexplore.ieee.org/document/9696512 </a>
