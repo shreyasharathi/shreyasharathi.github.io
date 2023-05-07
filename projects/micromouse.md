@@ -1,7 +1,7 @@
 ---
 layout: project
 type: project
-image: img/micromouse/micromouse-square.jpg
+image: img/micromouse/timer2.png
 title: "Auto Irrigation System "
 date: 2021
 published: true
@@ -13,8 +13,8 @@ summary: "My team designed and developed a system to eliminate the need to perfo
 ---
 
 <div class="text-center p-4">
-  <img width="200px" src="../img/micromouse/micromouse-robot.png" class="img-thumbnail" >
-  <img width="200px" src="../img/micromouse/micromouse-robot-2.jpg" class="img-thumbnail" >
+  <img width="200px" src="../img/micromouse/timer1.png" class="img-thumbnail" >
+  <img width="200px" src="../img/micromouse/timer3.png" class="img-thumbnail" >
 </div>
 
 For this project, I was the lead programmer who was responsible for programming the various capabilities of the **timer based auto irrigation system**.  I started by programming the basics, such as sensor polling and motor actuation using interrupts. I also designed and tested the PCB for the embedded system. The components used were Arduino Mega, DC motor, Relays, I2C, Keypad Matrix and a GSM module.
