@@ -3,10 +3,10 @@
     "name": "Shreyas Harathi",
     "label": "Graduate Student",
     "picture": "https://github.com/shreyasharathi.png",
-    "email": "shreyasharathi@vt.edu",
+    "email": "shreyasharathi00@vt.edu",
     "phone": "412-482-0336",
     "website": "https://shreyasharathi.github.io",
-    "summary": "I am pursuing M.S. in Computer Engineering in the Department of Electrical and Computer Engineering at Virginia Tech. I expect to graduate in Spring, 2024. I am currently a research assistant at the Center for Embedded Systems for Critical Applications working on incraesing the saftey of F1TENTH autonomous Race Car",
+    "summary": "I am pursuing M.S. in Computer Engineering in the Department of Electrical and Computer Engineering at Virginia Tech. I expect to graduate in Spring, 2024.<br> I am currently a Research Assistant at the Center for Embedded Systems for Critical Applications working on incraesing the saftey of F1TENTH Autonomous Race Car",
     "location": { "address": "815 Claytor Square", "postalCode": "24060", "city": "Blacksburg", "countryCode": "USA", "region": "Virginia" },
     "profiles": [
       { "network": "github", "username": "shreyasharathi", "url": "http://github.com/shreyasharathi" },
@@ -53,7 +53,7 @@
       "studyType": "B. Tech.",
       "startDate": "2018-08-23",
       "endDate": "2022-05-15",
-      "courses": [ ": Microprocessors and Microcontrollers",
+      "courses": [ "Microprocessors and Microcontrollers",
                   "Embedded Systems Processing and Architectures",
                   "Digital Signal Processing",
                   "Digital VLSI Design",
@@ -61,7 +61,7 @@
       ]
     }
   ],
-  "research": [
+  "volunteer": [
     {
       "organization": "Center for Embedded Systems for Critical Applications",
       "website": "https://vtechworks.lib.vt.edu/handle/10919/77458",
