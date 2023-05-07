@@ -18,16 +18,13 @@ summary: "AS the titile suggests, my team and I implemented Wall Following Syste
 <li> Use the distances 'a' and 'b' to calculate the angle 'alpha'. 'Alpha' is the difference in inclination between the front wheels and back wheels. </li>
 <li> Use 'alpha' to find the current distance to the car, and then and to find the estimated future distance to the wall. </li>
 <li> Run through the PID algorithm described above to get a steering angle. </li>
+<ul>
 <li> If the steering angle is between 0 degrees and 10 degrees, the car should drive at 1.5 meters per second. </li>
 <li> If the steering angle is between 10 degrees and 20 degrees, the speed should be 1.0 meters per second. </li>
 <li> Otherwise, the speed should be 0.5 meters per second. </li>
 </ul>
+</ul>
 
 
-<div class="ratio ratio-4x3 my-4">
-  <iframe src="https://youtube.com/shorts/v_jN9idFuTY" 
-          title="Wall Following" >
-  </iframe>
-</div>
 
 
