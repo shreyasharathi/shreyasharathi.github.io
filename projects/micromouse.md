@@ -2,25 +2,29 @@
 layout: project
 type: project
 image: img/micromouse/micromouse-square.jpg
-title: "Micromouse"
-date: 2015
+title: "Auto Irrigation System "
+date: 2021
 published: true
 labels:
-  - Robotics
+  - Embedded Systems
   - Arduino
   - C++
-summary: "My team developed a robotic mouse that won first place in the 2015 UH Micromouse competition."
+summary: "My team designed and developed a system to eliminate the need to perform the redundant task of controlling the motor irrigation system.."
 ---
 
 <div class="text-center p-4">
   <img width="200px" src="../img/micromouse/micromouse-robot.png" class="img-thumbnail" >
   <img width="200px" src="../img/micromouse/micromouse-robot-2.jpg" class="img-thumbnail" >
-  <img width="200px" src="../img/micromouse/micromouse-circuit.png" class="img-thumbnail" >
 </div>
 
-Micromouse is an event where small robot “mice” solve a 16 x 16 maze.  Events are held worldwide.  The maze is made up of a 16 by 16 gird of cells, each 180 mm square with walls 50 mm high.  The mice are completely autonomous robots that must find their way from a predetermined starting position to the central area of the maze unaided.  The mouse will need to keep track of where it is, discover walls as it explores, map out the maze and detect when it has reached the center.  having reached the center, the mouse will typically perform additional searches of the maze until it has found the most optimal route from the start to the center.  Once the most optimal route has been determined, the mouse will run that route in the shortest possible time.
+For this project, I was the lead programmer who was responsible for programming the various capabilities of the **timer based auto irrigation system**.  I started by programming the basics, such as sensor polling and motor actuation using interrupts. I also designed and tested the PCB for the embedded system. The components used were Arduino Mega, DC motor, Relays, I2C, Keypad Matrix and a GSM module.
 
-For this project, I was the lead programmer who was responsible for programming the various capabilities of the mouse.  I started by programming the basics, such as sensor polling and motor actuation using interrupts.  From there, I then programmed the basic PD controls for the motors of the mouse.  The PD control the drive so that the mouse would stay centered while traversing the maze and keep the mouse driving straight.  I also programmed basic algorithms used to solve the maze such as a right wall hugger and a left wall hugger algorithm.  From there I worked on a flood-fill algorithm to help the mouse track where it is in the maze, and to map the route it takes.  We finished with the fastest mouse who finished the maze within our college.
+- This system is particularly useful when it is inaccessible at night, when the situation poses a risk to the person due to low visibility in the farmlands, insects/wild animals, and other factors. 
+- The system allows the user to run the motor or any other appliance without manual supervision, without any difficulties. 
+- GSM was used to allow remote access to the system that improves the overall accessibility.
+
+We have deployed this sytem in 22 farms across Thanjavur, India.
+
 
 Here is some code that illustrates how we read values from the line sensors:
 
@@ -35,5 +39,3 @@ byte ADCRead(byte ch)
     return ADC1RL;  // lower 8-bit value out of 10-bit data from the ADC
 }
 ```
-
-You can learn more at the [UH Micromouse News Announcement](https://manoa.hawaii.edu/news/article.php?aId=2857).
