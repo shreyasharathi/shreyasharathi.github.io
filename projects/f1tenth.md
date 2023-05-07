@@ -18,9 +18,9 @@ summary: "Implemented Wall Following and Collision Avoidance System"
           allowfullscreen>
   </iframe>
 </div>
-<div class="ratio ratio-4x3 my-4">
-  <iframe src="https://youtube.com/shorts/PsGbvClWz8E" 
-          title="Collision Avoidance" 
-          allowfullscreen>
-  </iframe>
-</div>
+
+<video controls autoplay loop width=100%>
+<source src="https://youtube.com/shorts/PsGbvClWz8E" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+
