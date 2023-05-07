@@ -2,56 +2,52 @@
 layout: project
 type: project
 image: img/cotton/cotton-square.png
-title: "Cotton"
+title: "Implementation of Overload Scheduling Algorithms in FreeRTOS"
 date: 2014
 published: true
 labels:
-  - Lisp
-  - GitHub
-summary: "A text adventure game that I developed for ICS 313."
+  - RTOS
+  - C
+summary: "Implementation of Rate Monotonic Scheduling and Deadline Monotonic Scheduling Algorithms in FreeRTOS"
 ---
 
 <img class="img-fluid" src="../img/cotton/cotton-header.png">
 
-Cotton is a horror-style text-based adventure game I developed using the functions and macros built from The Wizard's Game in [Conrad Barski's Land of Lisp](http://landoflisp.com/). Slightly more interesting and convoluted! (It is not that scary.)
+Designed a custom scheduler to implement the RMS and DMS (pre-emptive) scheduling algorithm in C based on FreeRTOS.
 
-To give you a flavor of the game, here is an excerpt from one run:
+The summary of the algorithms and implementation is as follows:
 
 <hr>
 
 <pre>
-You open your eyes, and you are greeted by an unfamiliar ceiling.
-Startled, you get to your feet and quickly scan your surroundings. It's
-dark except for the stream of light coming from a crack on the only boarded
-window in the room. You try to peek through the crack, but you cannot see
-anything. You wonder where you are and who could have possibly brought you here.
 
-<--------------------help------------------------>
-Enter quit or one of the following commands -
-Weld light look walk pickup inventory help h ?
-<------------------------------------------------>
+RMS is a priority-based scheduling algorithm used to schedule periodic real-time tasks. It assigns priorities to tasks based on their periods, with shorter periods assigned higher priorities. The fundamental principle of RMS is that tasks with shorter periods have higher priority and are scheduled before tasks with longer periods. This algorithm assumes that the execution times of tasks are known and constant.
 
-look
-The room is a picture of decay with only a faded number identifying it as room-4. The bed you were
- lying on is stained with what looks like dried blood. Could it be your blood? No - it is not. The
- only way out of the room aside from the door to the corridor is a window that is boarded shut. It
- looks like it has been like that for decades. There is a door going west from here. You see a candle
- on the floor. You see a match on the floor.
+Key features of RMS:
 
-pickup candle
-- you are now carrying the candle -
+- Priority assignment based on task periods.
+- Fixed-priority scheduling.
+- Assumes deterministic task execution times.
+- Preemptive scheduling (higher priority tasks can preempt lower priority tasks).
+- Guarantees the schedulability of a set of tasks if their total utilization is less than a certain threshold (around 69%).
 
-pickup match
-- you are now carrying the match -
+Deadline Monotonic Scheduling (DMS):
+DMS is also a priority-based scheduling algorithm used for real-time systems. Like RMS, it assigns priorities to tasks based on their deadlines. However, unlike RMS, DMS does not assume deterministic execution times. Instead, it focuses on meeting task deadlines, considering the worst-case execution time.
+Key features of DMS:
 
-light match candle
+- Priority assignment based on task deadlines.
+- Fixed-priority scheduling.
+- Considers worst-case execution times.
+- Preemptive scheduling.
+- Guarantees the schedulability of a set of tasks if their total utilization is less than a certain threshold (around 100%).
 
-The candle is now lit. It illuminates everything in the room.
 
-walk west
-The corridor is lit with the candle. It is so long that you cannot see to the end. You notice that
- there are words written on the wall. There is a door going east from here. There is a way going north
- from here. There is a door going south from here.
+- The algorithm does not need to perform any schedulability test.
+- In the event that a job misses its deadline, it is suspended and runs as a new job at its next release time. In other words, the current (missed) instance of the task is dropped.
+- The code prints out relevant information to the serial monitor, e.g., which task is executing, if a task misses its deadline, etc.
+- If a job executes for more than its worst-case execution time (i.e., an execution overrun occurs), it is suspended until its next release time. Again, conceptually, this overrun job is dropped
+- xExtended_TCB is used to help with maintaining a list of per-task parameters.
+
 </pre>
 
 <hr>
