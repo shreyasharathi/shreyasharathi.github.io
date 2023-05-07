@@ -15,7 +15,6 @@ summary: "Published in: 2021 Innovations in Power and Advanced Computing Technol
 
 <div class="text-center p-4">
   <img width="200px" src="../img/micromouse/paper1.jpg" class="img-thumbnail" >
-  <img width="200px" src="../img/micromouse/paper2.jpg" class="img-thumbnail" >
   <img width="200px" src="../img/micromouse/paper3.png" class="img-thumbnail" >
 </div>
 
