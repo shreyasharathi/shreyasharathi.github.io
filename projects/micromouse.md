@@ -31,7 +31,7 @@ For this project, I was the lead programmer who was responsible for programming 
 <li> A simple 5 V relay is used to perform a switching check to control the motor when an alarm interrupt is raised. The conventional LCD wiring was replaced with the I2C Serial interface that allowed for a simple wiring setup and maximum usage of the Arduino’s serial communication. </li>
 <li> GSM is used to remotely control the product and achieve a remote-less system. With the inclusion of GSM, the user can control the irrigation system dynamically, and turn the system on or off using a mobile phone. </li>
 <li> An external switch is used to switch between the two modes in-built to control either a 3-phase irrigation motor or a 1-phase appliance. </li>
-<ul>
+</ul>
 
 <h3> Features </h3>
 <ul>
