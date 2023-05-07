@@ -1,28 +1,39 @@
 ---
 layout: project
 type: project
-image: img/vacay/vacay-square.png
+image: img/vacay/f1tenth1.HEIC  
 title: "Vacay"
-date: 2015
+date: 2022
 published: true
 labels:
-  - Javascript
+  - J
   - Meteor
   - MongoDB
   - GitHub
 summary: "A responsive web application for travel planning that my team developed in ICS 415."
 ---
 
-<img class="img-fluid" src="../img/vacay/vacay-home-page.png">
+							<h6 style="color:black">Automated vehicle research platform</h6>
+							<ul>
+								<div class="row">
+									<div class="col-auto"></div>
+									<div class="col-4">
+										<li>Dynamic obstacle avoidance</li>
+										<video controls autoplay loop width=100%>
+										<source src="img/vacay/collision_avoidance.mp4" type="video/mp4">
+										Your browser does not support the video tag.
+										</video>
+									</div>
+									<div class="col-1"></div>
+									<div class="col-4">
+										<li>Wall following</li>
+										<video controls autoplay loop width=100%>
+										<source src="img/vacay/wall_following.mp4" type="video/mp4">
+										Your browser does not support the video tag.
+										</video>
+									</div>
+									<div class="col-auto"></div>
+								</div>
+								<li>Build based on <a style="color:#5DADE2;" href="https://f1tenth.org/about.html">F1Tenth</a></li>
+							</ul>
 
-Vacay is a web application that I helped create as a team project in ICS 415, Spring 2015. The project helped me learn how to design and implement a responsive web site.
-
-Vacay is implemented using [Meteor](http://meteor.com), a JavaScript application platform. Within two weeks, we created a website that implements several types of reservations including flights, hotels, and car rentals.
-
-In this project I gained experience with full-stack web application design and associated technologies, including [MongoDB](http://mongodb.com) for database storage, the [Twitter Bootstrap](http://getbootstrap.com/) CSS Framework for the user interface, and Javascript for both client and server-side programming. 
-
-Here is some example code to illustrate Simple Schema use:
-
-{% gist 9defa1fb3f4eb593ba5fa9eacedca960 %}
- 
-Source: <a href="https://github.com/theVacay/vacay">theVacay/vacay</a>
