@@ -3,7 +3,7 @@ layout: project
 type: project
 image: img/cotton/FreeRTOS_logo.jpeg
 title: "Implementation of Overload Scheduling Algorithms in FreeRTOS"
-date: 2014
+date: 2023
 published: true
 labels:
   - RTOS
