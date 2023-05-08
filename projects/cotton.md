@@ -38,7 +38,7 @@ Key features of DMS:
 - Preemptive scheduling.
 - Guarantees the schedulability of a set of tasks if their total utilization is less than a certain threshold (around 100%).
 
-<h1>Priority assignment is carried out in the following way </h1>
+<h4>Priority assignment is carried out in the following way </h4>
 ```cpp
 static void prvSetFixedPriorities(void)
 {
