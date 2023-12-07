@@ -16,8 +16,10 @@ In this blog post, we shall delve into a machine learning project that concentra
 ## THE DATASET
 
 Our dataset contains details of 200 rows and 6 columns. Each column is a variable, and the variables are : Age, Sex, Blood Pressure, Cholestrol, The ratio of Sodium to Potassium in the Blood and finally, the drug type. This can be verified by running 
+```{python}
 df = pd.read_csv("drug200.csv")
 df
+```
 insert image of data set
 
 we can check for duplicates in the dataset using df.duplicated().sum(). here, the output is 0, implying that there are no duplicates. Further, we can generate plots to visualize the distribution of each target varible. For example, we can see the count of each drug using 
