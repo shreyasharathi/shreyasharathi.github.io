@@ -16,12 +16,12 @@ In this blog post, we shall delve into a machine learning project that concentra
 ## THE DATASET
 
 Our dataset contains details of 200 rows and 6 columns. Each column is a variable, and the variables are : Age, Sex, Blood Pressure, Cholestrol, The ratio of Sodium to Potassium in the Blood and finally, the drug type. This can be verified by running
-<mark style="background-color:violet;">
 
-df = pd.read_csv("drug200.csv")
-df
 
-</mark>
+<mark style="background-color:violet;"> df = pd.read_csv("drug200.csv")</mark>
+<mark style="background-color:violet;"> df</mark>
+
+
 
 insert image of data set
 
