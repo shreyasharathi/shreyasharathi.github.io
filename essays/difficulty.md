@@ -1,54 +1,88 @@
 ---
 layout: essay
 type: essay
-title: "The difficult things will always be difficult"
+title: "Drug Classification"
 # All dates must be YYYY-MM-DD format!
 date: 2016-02-06
 published: true
 labels:
-  - Engineering
+  - Classification
+  - Random Forest
+  - Logistic Regression
 ---
 
-<img width="200px" class="rounded float-start pe-4" src="../img/difficulty/degree_difficulty.jpg">
+In this blog post, we shall delve into a machine learning project that concentrates on classifying drugs according to patient features. The dataset assigned for this task encapsulates patients' information and the prescribed medications. To predict the suitable drug for a patient, our objective entails constructing and assessing two classification models: Logistic Regression and Random Forest.
 
-*Difficulty: a thing that is hard to accomplish, deal with, or understand.*
+## THE DATASET
 
-One of my friends asked the question earlier last week -- why is it so hard to be an officer for the student branch? Why is so hard compared to working at my on-campus job? This question came after he struggled a little with bookkeeping for the student organization.
+Our dataset contains details of 200 rows and 6 columns. Each column is a variable, and the variables are : Age, Sex, Blood Pressure, Cholestrol, The ratio of Sodium to Potassium in the Blood and finally, the drug type. This can be verified by running 
+df = pd.read_csv("drug200.csv")
+df
+insert image of data set
 
-Now I gave him the standard answer - being an officer of an organization requires that you manage your time between school and work. There isn't anyone telling you what to do. It's the answer any good mentor would give, and is mostly true.
+we can check for duplicates in the dataset using df.duplicated().sum(). here, the output is 0, implying that there are no duplicates. Further, we can generate plots to visualize the distribution of each target varible. For example, we can see the count of each drug using 
+sns.countplot(x=df['Drug'])
+plt.title('Drug Distribution number');
+show drug distribution
 
-But the more I though about it, the more I wondered to myself...damn that's a really great question; it's one that deserves some more thought. Most people I think stop at the answer I gave previously - he obviously isn't managing his time properly.
+## PreProcessing
 
-Here's what I think: the difficult things will always be difficult.
+Here, we will define features (X) and target (y). 
+X = df.drop('Drug' , axis='columns')
+y = df['Drug']
+X = pd.get_dummies(X)
 
-## In the context of programming
+Now, we will spilt the dataset into test and training data.
+X_train , X_test , y_train , y_test = train_test_split(X , y , test_size=0.2 , shuffle= True , random_state=42)
+The dataset is split into training and testing sets, with 80% of the data used for training and 20% for testing.
 
-In the context of programming, this has always been true. The difficult problems have always been different, although changes in technology can change the landscape quite a bit. "Business" type applications are the things that come to mind for me. Those types of applications are usually coupled in some way with people ... and people are awfully hard to deal with!
+## ML Models
+### 1. Logistic Regression
+A Logistic Regression model is trained on the training set, and its performance is evaluated on the test set. This includes calculating accuracy, generating a classification report, and visualizing the confusion matrix.
+lr_model = LogisticRegression(max_iter=1500)
+lr_model.fit(X_train, y_train)
+lr_model.score(X_train , y_train)
+lr_pred = lr_model.predict(X_test)
 
-Consider that one of the most popular content management systems is also considered the most horrible - Wordpress. But really, is there anything that fills that need? If it was so easy in the first place, where is the solution? Where's the magic CMS that is designed well enough that everyone hops on the boat to use it?
+on running accuracy_score(y_test , lr_pred), we get 1. An accuracy of 1 corresponds to 100%, indicating that the model has made correct predictions for all instances in the dataset.
 
-Some things are just difficult - building applications that humans use is hard, and will probably be hard for at least the near future.
+we can generate a confusion matrix using:
+sns.heatmap(confusion_matrix(y_test , lr_pred));
 
-## In the context of engineering
+confusion matrix 1
 
-Ever hear people ragging on engineering companies for delivering late and way over budget? Well, some engineering jobs are really difficult, especially if the requirements and funding are undulating underneath you. Because of the nature of the problem, sometimes engineering firms require large amounts of engineers and workers, inviting further problems and delays.
+as we can see in the confusion matrix diagram, the diagonals are colored and everything else is black (0)! This indicates that the model is performing well.
 
-The Honolulu Rail project at home has become this sort of poster child of failure, budget overrun and overall incompetence in Hawaii. Well, working though regulatory boards and fiscal procedures in Hawaii seems like it's a mind bogglingly difficult job to do. Granted, there might be some fishy stuff going on, but I refuse to believe that everyone is involved for nefarious reasons.
+### 1. Random Forest
+Similar to the Logistic Regression model, a Random Forest classifier is trained and evaluated on the test set.
 
-The problem of creating an unprecedented public transportation backbone on an island is difficult! I'm not sure we would have done it right, even if the best people were involved.
+RF_model = RandomForestClassifier(n_estimators=200)
+RF_model.fit(X_train, y_train)
+RF_pred = RF_model.predict(X_test)
 
-## In the context of relationships
 
-So in the end, we realize that all engineering and programming is there for a reason - to serve human needs. Maybe that's why those things are difficult, because they both involve humans and are for humans.
+On running accuracy_score(y_test, RF_pred), we get 1. An accuracy of 1 corresponds to 100%, indicating that the model has made correct predictions for all instances in the dataset.
 
-Relationships, regardless if they're romantic or not take work. Humans are fickle creatures and relationships can come and go with the wind. To properly maintain something over time requires work. Family takes work. Marriage takes work. We live to figure out what works and what doesn't and hope that as we move forward we're improving.
+we can generate a confusion matrix using:
+sns.heatmap(confusion_matrix(y_test, RF_pred));
 
-Relationships have always been difficult, and by nature will continue to be so.
+inset confusion matrix 2
+as we can see in the confusion matrix diagram, the diagonals are colored and everything else is black (0)! This indicates that the model is performing well.
 
-## Okay!
+## Highest Influencing Features
+This section visualizes the feature importance for the Logistic Regression model, providing insights into which features contribute more to the model's predictions.
+We can run the following code to find it out:
 
-So back to the original premise; why is being one of the club officers so difficult?
+features = X_test.columns
+importance_f = lr_model.coef_[0]
+feat_imp = pd.Series(importance_f, index=features).sort_values()
+feat_imp.tail().plot(kind='barh')
+plt.xlabel("Value")
+plt.ylabel("Features")
+plt.title("Feature Importance");
 
-And the final answer - it's supposed to be difficult, and it's supposed to challenge you, just like everything else that humans do that is difficult: programming, engineering, engaging in relationships, pondering the universe, etc.
+insert final pic
 
-Ultimately the question you should really ask yourself if something if particularly difficult is then "is it worth it"? That is something that is context specific and only you can answer yourself.
+## Conclusion
+In this blog post, we explored a drug classification project using machine learning. We started by understanding the dataset, visualizing key features, and preprocessing the data. Two classification models, Logistic Regression and Random Forest, were trained and evaluated. The blog post concludes by highlighting the importance of certain features in predicting drug classes. I used 2 models, logitic regression model and random forest model, and they both got 100% accuracy in training and testing.
+
