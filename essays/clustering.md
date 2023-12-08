@@ -6,9 +6,8 @@ title: "K-Means Clustering"
 date: 2023-11-17
 published: true
 labels:
-  - Classification
-  - Random Forest
-  - Logistic Regression
+  - Clustering
+  - K-Means
 ---
 
 Clustering is a fundamental technique in the field of unsupervised machine learning, allowing us to discover hidden patterns and group similar data points together. One popular algorithm for clustering is K-Means, and in this blog post, we'll walk through a hands-on example using the well-known Iris dataset.
