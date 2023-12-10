@@ -20,7 +20,7 @@ The datasets contains transactions made by credit cards in September 2013 by eur
 data = pd.read_csv('creditcard.csv',sep=',')
 data.head()
 ```
-<img class="img-fluid" src="../img/outlier/otl_dataset.png" width= "20%" >
+<img class="img-fluid" src="../img/outlier/otl_dataset.png" width= "40%" >
 
 ## EDA
 ```cpp
@@ -46,7 +46,7 @@ plt.ylabel('Transactions')
 plt.yscale('log')
 plt.show()
 ```
-<img class="img-fluid" src="../img/outlier/otl_plot1.png" width= "20%" >
+<img class="img-fluid" src="../img/outlier/otl_plot1.png" width= "40%" >
 
 Let us generate a plot to visualize time of transaction vs amount per class
 ```cpp
@@ -59,7 +59,7 @@ plt.xlabel('Time (in Seconds)')
 plt.ylabel('Amount')
 plt.show()
 ```
-<img class="img-fluid" src="../img/outlier/otl_plot2.png" width= "20%" >
+<img class="img-fluid" src="../img/outlier/otl_plot2.png" width= "40%" >
 
 Let us generate crrelation of each feature.
 ```cpp
@@ -68,7 +68,7 @@ features = cor1.index
 plt.figure(figsize=(20,20))
 g=sns.heatmap(data[tfeatures].corr(),annot=True,cmap="RdYlGn")
 ```
-<img class="img-fluid" src="../img/outlier/otl_heatmap.png" width= "20%" >
+<img class="img-fluid" src="../img/outlier/otl_heatmap.png" width= "40%" >
 
 ## ML Models
 ### 1. Isolation Forest
@@ -106,11 +106,11 @@ for i, (clf_name,clf) in enumerate(classifiers.items()):
 ```
 Our final output is:
 
-<img class="img-fluid" src="../img/outlier/otl_output.png" width= "20%" >
+<img class="img-fluid" src="../img/outlier/otl_output.png" width= "40%" >
 
 In this plot, each point on the x-axis represents a transaction, and the y-axis represents the outlier score. The color of the marker indicates whether the transaction was classified as a valid (blue) or fraudulent (red) transaction. 
 
-<img class="img-fluid" src="../img/outlier/otl_final.png" width= "20%" >
+<img class="img-fluid" src="../img/outlier/otl_final.png" width= "40%" >
 
 ## Conclusion 
 Isolation Forest has an accuracy score of 0.997 and LOF has an accuracy score of 0.996. The key point of difference is that fraud detection is 31% in isolation forest whereas for LOF it is just 5%. Hence for our purposes and this dataset, isolation forest would be more useful.
