@@ -90,8 +90,8 @@ print("Mean Squared Error =", mean_squared_error(y_test, y_preds))
 print("R-squared =", r2_score(y_test, y_preds))
 ```
 Upon evaluation,
-Mean Absolute Error =  3856.3599427002528
-Mean Squared Error =  19646866.89869981
+Mean Absolute Error =  3856.3599427002528 <br>
+Mean Squared Error =  19646866.89869981 <br>
 R-squared =  0.9794041289245915
 
 ## Conclusion
