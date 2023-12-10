@@ -11,24 +11,23 @@ labels:
 
 In this blog post, we'll look into a salary dataset and employ linear regression to understand the relationship between years of experience and salary. Linear regression in machine learning is a supervised learning algorithm used for predicting a continuous outcome variable based on one or more input features. It establishes a linear relationship between the input features and the target variable by finding the best-fitting line through the data points.
 
-## THE DATASET
+## The Dataset
 
 Our dataset contains 30 entries of our two variables, Years of experience and Salary. Let's load the dataset.
 
 ```cpp
 df = pd.read_csv('Salary_dataset.csv')
+df.head()
 ```
 
-insert image of data set
+<img class="img-fluid" src="../img/linear-reg/lr_dataset.png" >
 
 We'll clean our data by dropping unnecessary columns and checking for missing or duplicated values.
 ```cpp
 # Drop the 'Unnamed: 0' column
 df.drop('Unnamed: 0', axis=1, inplace=True)
-
 # Check for Null values
 df.isna().sum()
-
 # Check for Duplicated values
 df.duplicated().sum()
 ```
@@ -41,14 +40,10 @@ To gain insights into the dataset, we'll compute correlations and create visuali
 
 # Compute the correlation matrix
 correlation_matrix = df.corr()
-
-# Set the font scale for the plots
 sns.set(font_scale=2)
-
-# Create a pair plot
 sns.pairplot(df, height=8, aspect=10/8)
 ```
-inset plot
+<img class="img-fluid" src="../img/linear-reg/lr_pairplot.png" width = "50%" >
 
 ## ML Models
 ### 1.Linear Regression
@@ -81,7 +76,7 @@ plt.grid(True)
 plt.legend()
 plt.show()
 ```
-insert final pic
+<img class="img-fluid" src="../img/linear-reg/lr_output.png" width = "50%" >
 
 ## Model Evaluation
 To assess the performance of our model, we'll calculate key metrics such as mean absolute error, mean squared error, and R-squared.
@@ -94,6 +89,10 @@ print("Mean Absolute Error =", mean_absolute_error(y_test, y_preds))
 print("Mean Squared Error =", mean_squared_error(y_test, y_preds))
 print("R-squared =", r2_score(y_test, y_preds))
 ```
+Upon evaluation,
+Mean Absolute Error =  3856.3599427002528
+Mean Squared Error =  19646866.89869981
+R-squared =  0.9794041289245915
 
 ## Conclusion
 In conclusion, our exploration into the salary dataset using linear regression has provided valuable insights into the relationship between years of experience and salary.
