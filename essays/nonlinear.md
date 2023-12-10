@@ -20,7 +20,7 @@ data = pd.read_csv("housing.csv")
 print(data.head())
 ```
 
-<img class="img-fluid" src="../img/nonlinear/nlr_dataset.png" width= "20%" >
+<img class="img-fluid" src="../img/nonlinear/nlr_dataset.png" width= "40%" >
 
 
 ## Pre Processing
@@ -61,7 +61,7 @@ The residuals exhibit a clear non straight line, which provides a strong indicat
 
 This makes us to do somethhing more to find better fit of the model.
 
-<img class="img-fluid" src="../img/nonlinear/nlr_residual1.png" width= "20%" >
+<img class="img-fluid" src="../img/nonlinear/nlr_residual1.png" width= "40%" >
 
 ### 2. Applying transform
 We obtain a tranform by first running 
@@ -90,7 +90,7 @@ residual = y_test - y_predicted
 sns.residplot(x=y_predicted, y=residual, lowess=True, scatter_kws={'alpha': 0.5}, line_kws={'color': 'red', 'lw': 1, 'alpha': 0.8})
 plt.show()
 ```
-<img class="img-fluid" src="../img/nonlinear/nlr_residual2.png" width= "20%" >
+<img class="img-fluid" src="../img/nonlinear/nlr_residual2.png" width= "40%" >
 
 Residual plot for the transformed linear regression is more zigzag than the simple linear regression. This residual plot suggest that transformation makes the relationship more non- linear in nature.
 
@@ -132,7 +132,7 @@ sns.residplot(x=y_predicted, y=residual, lowess=True, scatter_kws={'alpha': 0.5}
 plt.show()
 ```
 
-<img class="img-fluid" src="../img/nonlinear/nlr_residual3.png" width= "20%" >
+<img class="img-fluid" src="../img/nonlinear/nlr_residual3.png" width= "40%" >
 
 
 ## Conclusion
