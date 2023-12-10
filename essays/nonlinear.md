@@ -9,22 +9,18 @@ labels:
   - Non-Linear Regression
 ---
 
-In this blog post, we'll walk through housing data and apply regression models to predict median house values.
+In this blog post, we'll walk through housing data and apply regression models to predict median house values. Nonlinear regression is a statistical method used to model the relationship between variables through nonlinear functions, allowing for more flexible and complex representations than linear regression. It involves estimating parameters that minimize the difference between observed and predicted values, often requiring optimization techniques.
 
-## THE DATASET
+## The Dataset
 
-Our dataset contains 20640 observations and 9 features + 1 target variable(median_house_value). let's load the dataset.
+Our dataset contains 20640 observations and 9 features and 1 target variable(median_house_value). Let's load the dataset.
 ```cpp
 # Load the data
 data = pd.read_csv("housing.csv")
-
-# Display basic information about the data
 print(data.head())
-print(data.shape)
-print(data.info())
 ```
 
-insert image of data set
+<img class="img-fluid" src="../img/nonlinear/nlr_dataset.png" width= "20%" >
 
 
 ## Pre Processing
@@ -40,9 +36,7 @@ plt.title('Scatter plot')
 plt.xlabel('median_income')
 plt.ylabel('median_house_value')
 plt.show()
-
 ```
-inset plot
 
 ## ML Models
 ### 1.Linear Regression
@@ -66,6 +60,8 @@ We obtain a R2 score of 0.446.
 The residuals exhibit a clear non straight line, which provides a strong indication of non-linearity in the data
 
 This makes us to do somethhing more to find better fit of the model.
+
+<img class="img-fluid" src="../img/nonlinear/nlr_residual1.png" width= "20%" >
 
 ### 2. Applying transform
 We obtain a tranform by first running 
@@ -94,6 +90,8 @@ residual = y_test - y_predicted
 sns.residplot(x=y_predicted, y=residual, lowess=True, scatter_kws={'alpha': 0.5}, line_kws={'color': 'red', 'lw': 1, 'alpha': 0.8})
 plt.show()
 ```
+<img class="img-fluid" src="../img/nonlinear/nlr_residual2.png" width= "20%" >
+
 Residual plot for the transformed linear regression is more zigzag than the simple linear regression. This residual plot suggest that transformation makes the relationship more non- linear in nature.
 
 ### Model 3
@@ -123,7 +121,7 @@ y_predicted = pol_reg.predict(X_p)
 rmse = np.sqrt(mean_squared_error(y_test, y_predicted))
 r2 = r2_score(y_test, y_predicted)
 ```
-we end up with a R2 of 0.449, which is our best score yet. now we run:
+We end up with a R2 of 0.449, which is our best score yet. now we run:
 
 ```cpp
 # Assuming y_predicted and y_test are defined and are numpy arrays or similar data structures that support arithmetic operations
@@ -133,6 +131,8 @@ residual = y_test - y_predicted
 sns.residplot(x=y_predicted, y=residual, lowess=True, scatter_kws={'alpha': 0.5}, line_kws={'color': 'red', 'lw': 1, 'alpha': 0.8})
 plt.show()
 ```
+
+<img class="img-fluid" src="../img/nonlinear/nlr_residual.png" width= "20%" >
 
 
 ## Conclusion
