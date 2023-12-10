@@ -105,9 +105,12 @@ for i, (clf_name,clf) in enumerate(classifiers.items()):
     n_errors = (y_pred != Y).sum()
 ```
 Our final output is:
+
 <img class="img-fluid" src="../img/outlier/otl_output.png" width= "20%" >
 
 In this plot, each point on the x-axis represents a transaction, and the y-axis represents the outlier score. The color of the marker indicates whether the transaction was classified as a valid (blue) or fraudulent (red) transaction. 
+
 <img class="img-fluid" src="../img/outlier/otl_final.png" width= "20%" >
+
 ## Conclusion 
 Isolation Forest has an accuracy score of 0.997 and LOF has an accuracy score of 0.996. The key point of difference is that fraud detection is 31% in isolation forest whereas for LOF it is just 5%. Hence for our purposes and this dataset, isolation forest would be more useful.
