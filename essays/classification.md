@@ -21,7 +21,7 @@ Our dataset contains details of 200 rows and 6 columns. Each column is a variabl
 df = pd.read_csv("drug200.csv")
 df
 ```
-<img class="img-fluid" src="../img/classification/classification_dataset.png" width= "90%" >
+<img class="img-fluid" src="../img/classification/classification_dataset.png" width= "20%" >
 
 
 We can check for duplicates in the dataset using ``` df.duplicated().sum()``` here, the output is 0, implying that there are no duplicates. Further, we can generate plots to visualize the distribution of each target varible. For example, we can see the count of each drug using :
