@@ -9,7 +9,7 @@ labels:
   - Linear Regression
 ---
 
-In this blog post, we'll look into a salary dataset and employ linear regression to understand the relationship between years of experience and salary. 
+In this blog post, we'll look into a salary dataset and employ linear regression to understand the relationship between years of experience and salary. Linear regression in machine learning is a supervised learning algorithm used for predicting a continuous outcome variable based on one or more input features. It establishes a linear relationship between the input features and the target variable by finding the best-fitting line through the data points.
 
 ## THE DATASET
 
