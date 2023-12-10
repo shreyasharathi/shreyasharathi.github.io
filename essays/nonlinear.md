@@ -132,7 +132,7 @@ sns.residplot(x=y_predicted, y=residual, lowess=True, scatter_kws={'alpha': 0.5}
 plt.show()
 ```
 
-<img class="img-fluid" src="../img/nonlinear/nlr_residual.png" width= "20%" >
+<img class="img-fluid" src="../img/nonlinear/nlr_residual3.png" width= "20%" >
 
 
 ## Conclusion
