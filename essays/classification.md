@@ -21,14 +21,15 @@ Our dataset contains details of 200 rows and 6 columns. Each column is a variabl
 df = pd.read_csv("drug200.csv")
 df
 ```
-
+<img class="img-fluid" src="../img/classification/classification_dataset.png">
 insert image of data set
 
-we can check for duplicates in the dataset using df.duplicated().sum(). here, the output is 0, implying that there are no duplicates. Further, we can generate plots to visualize the distribution of each target varible. For example, we can see the count of each drug using :
+we can check for duplicates in the dataset using ```cpp df.duplicated().sum()``` here, the output is 0, implying that there are no duplicates. Further, we can generate plots to visualize the distribution of each target varible. For example, we can see the count of each drug using :
 ```cpp
 sns.countplot(x=df['Drug'])
 plt.title('Drug Distribution number');
 ```
+<img class="img-fluid" src="../img/classification/drug_distribution.png">
 show drug distribution
 
 ## PreProcessing
@@ -58,7 +59,7 @@ on running ```cpp accuracy_score(y_test , lr_pred)```, we get 1. An accuracy of 
 
 we can generate a confusion matrix using:
 ```cpp sns.heatmap(confusion_matrix(y_test , lr_pred));```
-
+<img class="img-fluid" src="../img/classification/classification_confusion_1.png">
 confusion matrix 1
 
 as we can see in the confusion matrix diagram, the diagonals are colored and everything else is black (0)! This indicates that the model is performing well.
@@ -76,8 +77,9 @@ we can generate a confusion matrix using:
 ```cpp
 sns.heatmap(confusion_matrix(y_test, RF_pred));
 ```
+<img class="img-fluid" src="../img/classification/classification_confusion_2.png">
 inset confusion matrix 2
-as we can see in the confusion matrix diagram, the diagonals are colored and everything else is black (0)! This indicates that the model is performing well.
+As we can see in the confusion matrix diagram, the diagonals are colored and everything else is black (0)! This indicates that the model is performing well.
 
 ## Highest Influencing Features
 This section visualizes the feature importance for the Logistic Regression model, providing insights into which features contribute more to the model's predictions.
@@ -91,6 +93,7 @@ plt.xlabel("Value")
 plt.ylabel("Features")
 plt.title("Feature Importance");
 ```
+<img class="img-fluid" src="../img/classification/classification_features.png">
 insert final pic
 
 ## Conclusion
