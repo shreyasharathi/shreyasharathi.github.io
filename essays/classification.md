@@ -13,7 +13,7 @@ labels:
 
 In this blog post, we shall delve into a machine learning project that concentrates on classifying drugs according to patient features. The dataset assigned for this task encapsulates patients' information and the prescribed medications. To predict the suitable drug for a patient, our objective entails constructing and assessing two classification models: Logistic Regression and Random Forest.
 
-## THE DATASET
+## The Dataset
 
 Our dataset contains details of 200 rows and 6 columns. Each column is a variable, and the variables are : Age, Sex, Blood Pressure, Cholestrol, The ratio of Sodium to Potassium in the Blood and finally, the drug type. This can be verified by running
 
@@ -21,19 +21,17 @@ Our dataset contains details of 200 rows and 6 columns. Each column is a variabl
 df = pd.read_csv("drug200.csv")
 df
 ```
-<img class="img-fluid" src="../img/classification/classification_dataset.png" style="width: 50%; height: 50%"/>
+<img class="img-fluid" src="../img/classification/classification_dataset.png" width: "50%" >
 
-insert image of data set
 
-we can check for duplicates in the dataset using ```cpp df.duplicated().sum()``` here, the output is 0, implying that there are no duplicates. Further, we can generate plots to visualize the distribution of each target varible. For example, we can see the count of each drug using :
+We can check for duplicates in the dataset using ``` df.duplicated().sum()``` here, the output is 0, implying that there are no duplicates. Further, we can generate plots to visualize the distribution of each target varible. For example, we can see the count of each drug using :
 ```cpp
 sns.countplot(x=df['Drug'])
 plt.title('Drug Distribution number');
 ```
-<img class="img-fluid" src="../img/classification/drug_distribution.png">
-show drug distribution
+<img class="img-fluid" src="../img/classification/drug_distribution.png" width: "50%">
 
-## PreProcessing
+## Pre-Processing
 
 Here, we will define features (X) and target (y). 
 ```cpp
@@ -58,14 +56,14 @@ lr_pred = lr_model.predict(X_test)
 ```
 on running ```cpp accuracy_score(y_test , lr_pred)```, we get 1. An accuracy of 1 corresponds to 100%, indicating that the model has made correct predictions for all instances in the dataset.
 
-we can generate a confusion matrix using:
+We can generate a confusion matrix using:
 ```cpp sns.heatmap(confusion_matrix(y_test , lr_pred));```
-<img class="img-fluid" src="../img/classification/classification_confusion_1.png">
-confusion matrix 1
+<img class="img-fluid" src="../img/classification/classification_confusion_1.png" width: "50%">
+
 
 as we can see in the confusion matrix diagram, the diagonals are colored and everything else is black (0)! This indicates that the model is performing well.
 
-### 1. Random Forest
+### 2. Random Forest
 Similar to the Logistic Regression model, a Random Forest classifier is trained and evaluated on the test set.
 ```cpp
 RF_model = RandomForestClassifier(n_estimators=200)
@@ -74,12 +72,12 @@ RF_pred = RF_model.predict(X_test)
 ```
 On running accuracy_score(y_test, RF_pred), we get 1. An accuracy of 1 corresponds to 100%, indicating that the model has made correct predictions for all instances in the dataset.
 
-we can generate a confusion matrix using:
+We can generate a confusion matrix using:
 ```cpp
 sns.heatmap(confusion_matrix(y_test, RF_pred));
 ```
-<img class="img-fluid" src="../img/classification/classification_confusion_2.png">
-inset confusion matrix 2
+<img class="img-fluid" src="../img/classification/classification_confusion_2.png" width: "50%">
+
 As we can see in the confusion matrix diagram, the diagonals are colored and everything else is black (0)! This indicates that the model is performing well.
 
 ## Highest Influencing Features
@@ -94,8 +92,7 @@ plt.xlabel("Value")
 plt.ylabel("Features")
 plt.title("Feature Importance");
 ```
-<img class="img-fluid" src="../img/classification/classification_features.png">
-insert final pic
+<img class="img-fluid" src="../img/classification/classification_features.png" width: "50%">
 
 ## Conclusion
 In this blog post, we explored a drug classification project using machine learning. We started by understanding the dataset, visualizing key features, and preprocessing the data. Two classification models, Logistic Regression and Random Forest, were trained and evaluated. The blog post concludes by highlighting the importance of certain features in predicting drug classes. I used 2 models, logitic regression model and random forest model, and they both got 100% accuracy in training and testing.
