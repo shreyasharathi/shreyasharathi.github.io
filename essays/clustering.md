@@ -12,7 +12,7 @@ labels:
 
 Clustering is a fundamental technique in the field of unsupervised machine learning, allowing us to discover hidden patterns and group similar data points together. One popular algorithm for clustering is K-Means, and in this blog post, we'll walk through a hands-on example using the well-known Iris dataset.
 
-## THE DATASET
+## The Dataset
 
 The Iris dataset is a classic dataset in machine learning, often used for testing and learning purposes. It consists of 150 samples of iris flowers, each belonging to one of three species: setosa, versicolor, or virginica. The features include sepal length, sepal width, petal length, and petal width.
 
@@ -62,3 +62,4 @@ plt.scatter(X_scaled[:, 0], X_scaled[:, 1], c=y_iris, s=50, cmap='viridis')
 ## Conclusion
 In this blog post, we've explored the application of K-Means clustering on the Iris dataset. The code provided serves as a starting point for anyone looking to dive into clustering using a well-known dataset. 
 
+Source: <a href="https://github.com/shreyasharathi/shreyasharathi.github.io/blob/main/Notebooks/kmeans.ipynb"><i class="large github icon "></i>k-means</a>
