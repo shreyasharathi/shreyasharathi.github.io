@@ -1,3 +1,4 @@
 # Professional Portfolio
 
-For details on this professional portfolio, please see https://techfolios.github.io.
+All blog posts are available under essays folder.
+All notebooks are available under Notebooks folder.
