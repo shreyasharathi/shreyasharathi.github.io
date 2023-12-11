@@ -97,3 +97,4 @@ plt.title("Feature Importance");
 ## Conclusion
 In this blog post, we explored a drug classification project using machine learning. We started by understanding the dataset, visualizing key features, and preprocessing the data. Two classification models, Logistic Regression and Random Forest, were trained and evaluated. The blog post concludes by highlighting the importance of certain features in predicting drug classes. I used 2 models, logitic regression model and random forest model, and they both got 100% accuracy in training and testing.
 
+Source: <a href="https://github.com/shreyasharathi/shreyasharathi.github.io/blob/main/Notebooks/drug-classification.ipynb"><i class="large github icon "></i>drug-classification</a>
