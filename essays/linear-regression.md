@@ -96,3 +96,5 @@ R-squared =  0.9794041289245915
 
 ## Conclusion
 In conclusion, our exploration into the salary dataset using linear regression has provided valuable insights into the relationship between years of experience and salary.
+
+Source: <a href="https://github.com/shreyasharathi/shreyasharathi.github.io/blob/main/Notebooks/linear_regression.ipynb"><i class="large github icon "></i>linear-regression</a>
