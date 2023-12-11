@@ -114,3 +114,6 @@ In this plot, each point on the x-axis represents a transaction, and the y-axis 
 
 ## Conclusion 
 Isolation Forest has an accuracy score of 0.997 and LOF has an accuracy score of 0.996. The key point of difference is that fraud detection is 31% in isolation forest whereas for LOF it is just 5%. Hence for our purposes and this dataset, isolation forest would be more useful.
+
+
+Source: <a href="https://github.com/shreyasharathi/shreyasharathi.github.io/blob/main/Notebooks/outlier.ipynb"><i class="large github icon "></i>outlier</a>
