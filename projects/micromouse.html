@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="title" content="Auto Irrigation System  | Shreyas Harathi | Professional Portfolio">
+    <meta name="description" content="">
+    <meta name="image" content="https://github.com/shreyasharathi.png">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Shreyas Harathi | Professional Portfolio">
+    <meta property="og:url" content="https://github.com/shreyasharathi/shreyasharathi.github.io/projects/micromouse.html">
+    <meta property="og:title" content="Auto Irrigation System  | Shreyas Harathi | Professional Portfolio">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="https://github.com/shreyasharathi.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/techfolio-theme/skyblue.css">
+    <link rel="stylesheet" type="text/css" href="/css/rouge/github.css">
+    <!-- Load MathJax if 'mathjax: true' is found in your _config.yml. -->
+    
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+    
+
+    <title>Auto Irrigation System  | Shreyas Harathi | Professional Portfolio</title>
+  </head>
+  <body>
+  <header class="navbar navbar-expand navbar-light bg-light bg-gradient border-bottom">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Shreyas Harathi</a>
+    <div class="ms-auto">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <a class="nav-link" href="/#projects">Projects</a>
+       <a class="nav-link" href="/#essays">Blog</a>
+        <a class="nav-link" href="/resume.html">Resume</a>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<div class="container py-4">
+  <h1 class="display-4">Auto Irrigation System </h1>
+ <div class="text-center p-4">
+  <img width="200px" src="../img/micromouse/timer1.png" class="img-thumbnail" />
+  <img width="200px" src="../img/micromouse/timer3.png" class="img-thumbnail" />
+</div>
+
+<p>For this project, I was the lead programmer who was responsible for programming the various capabilities of the <strong>timer based auto irrigation system</strong>.  I started by programming the basics, such as sensor polling and motor actuation using interrupts. I also designed and tested the PCB for the embedded system. The components used were Arduino Mega, DC motor, Relays, I2C, Keypad Matrix and a GSM module.</p>
+
+<ul>
+  <li>This system is particularly useful when it is inaccessible at night, when the situation poses a risk to the person due to low visibility in the farmlands, insects/wild animals, and other factors.</li>
+  <li>The system allows the user to run the motor or any other appliance without manual supervision, without any difficulties.</li>
+  <li>GSM was used to allow remote access to the system that improves the overall accessibility.</li>
+</ul>
+
+<h3>Specifications and Methodology</h3>
+
+<ul>
+  <li>The microcontroller used for controlling the operations is the Arduino Uno. It is a low-cost microcontroller that operates at 5V and has 2kb flash memory. The RTC 3231 Module was interfaced with the Arduino using <RTC3231.h> module. The time is loaded into the RTC at compile time and is maintained even at the loss of  power using the cell battery. The RTC module contains two interrupts that allow for up to two alarms, these were programmed into the microcontroller for providing a soft interrupt. RTC is responsible for maintaining the precision of the time.</RTC3231.h></li>
+  <li>The 16x2 LCD module was interfaced with the Arduino using the <LCD.h> in-built module and was programmed to display the RTC date and time.</LCD.h></li>
+  <li>A simple 5 V relay is used to perform a switching check to control the motor when an alarm interrupt is raised. The conventional LCD wiring was replaced with the I2C  Serial interface that allowed for a simple wiring setup and maximum usage of the Arduino’s serial communication.</li>
+  <li>GSM is used to remotely control the product and achieve a remote-less system. With the inclusion of GSM, the user can control the irrigation system dynamically, and turn the system on or off using a mobile phone.</li>
+  <li>An external switch is used to switch between the two modes in-built to control either a 3-phase irrigation motor or a 1-phase appliance.</li>
+</ul>
+
+<p>We have deployed this sytem in 22 farms across Thanjavur, India.</p>
+
+<p>Here is some code that illustrates how we read values from the line sensors:</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">byte</span> <span class="nf">ADCRead</span><span class="p">(</span><span class="n">byte</span> <span class="n">ch</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">word</span> <span class="n">value</span><span class="p">;</span>
+    <span class="n">ADC1SC1</span> <span class="o">=</span> <span class="n">ch</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">ADC1SC1_COCO</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">{</span>   <span class="c1">// wait until ADC conversion is completed   </span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">ADC1RL</span><span class="p">;</span>  <span class="c1">// lower 8-bit value out of 10-bit data from the ADC</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+</div>
+
+<footer class="navbar navbar-expand navbar-light bg-light bg-gradient border-top">
+  <div class="container-fluid">
+    <div class="ms-auto">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+       <!-- <small><a class="nav-link" href="https://techfolios.github.io">Made with Techfolios</a></small> -->
+      </ul>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  </body>
+</html>

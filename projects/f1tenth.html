@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="title" content=" Wall Following and Collision Avoidance | Shreyas Harathi | Professional Portfolio">
+    <meta name="description" content="">
+    <meta name="image" content="https://github.com/shreyasharathi.png">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Shreyas Harathi | Professional Portfolio">
+    <meta property="og:url" content="https://github.com/shreyasharathi/shreyasharathi.github.io/projects/f1tenth.html">
+    <meta property="og:title" content=" Wall Following and Collision Avoidance | Shreyas Harathi | Professional Portfolio">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="https://github.com/shreyasharathi.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/techfolio-theme/skyblue.css">
+    <link rel="stylesheet" type="text/css" href="/css/rouge/github.css">
+    <!-- Load MathJax if 'mathjax: true' is found in your _config.yml. -->
+    
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+    
+
+    <title> Wall Following and Collision Avoidance | Shreyas Harathi | Professional Portfolio</title>
+  </head>
+  <body>
+  <header class="navbar navbar-expand navbar-light bg-light bg-gradient border-bottom">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Shreyas Harathi</a>
+    <div class="ms-auto">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <a class="nav-link" href="/#projects">Projects</a>
+       <a class="nav-link" href="/#essays">Blog</a>
+        <a class="nav-link" href="/resume.html">Resume</a>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<div class="container py-4">
+  <h1 class="display-4"> Wall Following and Collision Avoidance</h1>
+ <p>My team and I at the Center for Embedded Systems for Critical Applications at Virginia Tech designed and implemented wall following node and collision avoidance node for F!TENTH Race Car.</p>
+<h3> WALL FOLLOWER </h3>
+<p>We first started out with implementing the wall following algorithm. It’s key features are as follows:</p>
+<ul>
+<li> The wall follow node implements a simple PID controller for the car to autonomously drive forward while staying centered. </li>
+<li> In the context of our car, the desired distance to the wall should be our set point for our controller, which means our error is the difference between the desired and actual distance to the wall. </li>
+<li> Obtain two laser scans, 'a' and 'b' </li>
+<li> Use the distances 'a' and 'b' to calculate the angle 'alpha'. 'Alpha' is the difference in inclination between the front wheels and back wheels. </li>
+<li> Use 'alpha' to find the current distance to the car, and then and to find the estimated future distance to the wall. </li>
+<li> Run through the PID algorithm described above to get a steering angle. </li>
+<ul>
+<li> If the steering angle is between 0 degrees and 10 degrees, the car should drive at 1.5 meters per second. </li>
+<li> If the steering angle is between 10 degrees and 20 degrees, the speed should be 1.0 meters per second. </li>
+<li> Otherwise, the speed should be 0.5 meters per second. </li>
+</ul>
+</ul>
+<p>The result is that we now have a car that can dynamically follow a set path. The video below shows is an example of the path.</p>
+<div class="text-center p-4">
+  <img width="200px" src="../img/f1tenth1.gif" class="img-thumbnail" />
+</div>
+
+<h3> COLLISON AVOIDANCE </h3>
+<p>Excited by the results of the previous algorithm, the team decided to extend the program. We set out to build a system that could not only follow a path, but also navigate it based on dynamically changing conditions.</p>
+
+<p>Sensors such as lidar, cameras, and radar are used to perceive the environment and gather data about the surroundings. Lidar sensors provide a 3D point cloud representation of the environment, while cameras and radar can provide additional information about objects, distances, and velocities.</p>
+
+<p>Custom Object detection algorithms are employed to identify and track objects in the sensor data. This involves using concepts computer vision, deep learning, or sensor fusion to detect and track other vehicles, pedestrians, or obstacles in real-time.</p>
+
+<p>The attached video shows our team’s success in achieving this!</p>
+
+<div class="text-center p-4">
+  <img width="200px" src="../img/f1tenth2.gif" class="img-thumbnail" />
+</div>
+
+<p>Here is a sample function that I have been authorized to share :</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">double</span> <span class="n">get_range</span><span class="p">(</span><span class="n">const</span> <span class="n">sensor_msgs</span><span class="p">::</span><span class="n">msg</span><span class="p">::</span><span class="n">LaserScan</span><span class="p">::</span><span class="n">ConstSharedPtr</span> <span class="n">scan_msg</span><span class="p">,</span> <span class="n">double</span> <span class="n">angle</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="o">/*</span>
+        <span class="n">Simple</span> <span class="n">helper</span> <span class="n">to</span> <span class="k">return</span> <span class="n">the</span> <span class="n">corresponding</span> <span class="nb">range</span> <span class="n">measurement</span> <span class="n">at</span> <span class="n">a</span> <span class="n">given</span> <span class="n">angle</span><span class="p">.</span> <span class="n">Make</span> <span class="n">sure</span> <span class="n">you</span> <span class="n">take</span> <span class="n">care</span> <span class="n">of</span> <span class="n">NaNs</span> <span class="ow">and</span> <span class="n">infs</span><span class="p">.</span>
+
+        <span class="n">Args</span><span class="p">:</span>
+            <span class="n">range_data</span><span class="p">:</span> <span class="n">single</span> <span class="nb">range</span> <span class="n">array</span> <span class="k">from</span> <span class="n">the</span> <span class="n">LiDAR</span>
+            <span class="n">angle</span><span class="p">:</span> <span class="n">between</span> <span class="n">angle_min</span> <span class="ow">and</span> <span class="n">angle_max</span> <span class="n">of</span> <span class="n">the</span> <span class="n">LiDAR</span> <span class="ow">in</span> <span class="n">radians</span>
+
+        <span class="n">Returns</span><span class="p">:</span>
+            <span class="nb">range</span><span class="p">:</span> <span class="nb">range</span> <span class="n">measurement</span> <span class="ow">in</span> <span class="n">meters</span> <span class="n">at</span> <span class="n">the</span> <span class="n">given</span> <span class="n">angle</span>
+        <span class="o">*/</span>
+
+        <span class="k">assert</span><span class="p">(</span><span class="n">angle</span> <span class="o">&gt;=</span> <span class="n">scan_msg</span><span class="o">-&gt;</span><span class="n">angle_min</span> <span class="o">&amp;&amp;</span> <span class="n">angle</span> <span class="o">&lt;=</span> <span class="n">scan_msg</span><span class="o">-&gt;</span><span class="n">angle_max</span><span class="p">);</span> <span class="o">//</span> <span class="n">Angle</span> <span class="n">must</span> <span class="n">be</span> <span class="n">within</span> <span class="nb">range</span>
+        <span class="nb">int</span> <span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="n">angle</span> <span class="o">-</span> <span class="n">scan_msg</span><span class="o">-&gt;</span><span class="n">angle_min</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">scan_msg</span><span class="o">-&gt;</span><span class="n">angle_increment</span><span class="p">);</span> <span class="o">//</span> <span class="n">index</span> <span class="n">i</span> <span class="n">of</span> <span class="n">closest</span> <span class="n">angle</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">std</span><span class="p">::</span><span class="n">isnan</span><span class="p">(</span><span class="n">scan_msg</span><span class="o">-&gt;</span><span class="n">ranges</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">||</span> <span class="n">scan_msg</span><span class="o">-&gt;</span><span class="n">ranges</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">scan_msg</span><span class="o">-&gt;</span><span class="n">range_max</span><span class="p">)</span> <span class="k">return</span> <span class="n">scan_msg</span><span class="o">-&gt;</span><span class="n">range_max</span><span class="p">;</span> <span class="o">//</span> <span class="n">In</span> <span class="n">case</span> <span class="n">of</span> <span class="n">NaNs</span> <span class="ow">and</span> <span class="n">infinity</span><span class="p">,</span> <span class="n">just</span> <span class="k">return</span> <span class="n">the</span> <span class="n">maximum</span> <span class="n">of</span> <span class="n">the</span> <span class="n">scan</span> <span class="n">message</span>
+        <span class="k">return</span> <span class="n">scan_msg</span><span class="o">-&gt;</span><span class="n">ranges</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<p>For more info about F1TENTH, visit <a href="https://f1tenth.org/"> https://f1tenth.org/ </a></p>
+
+</div>
+
+<footer class="navbar navbar-expand navbar-light bg-light bg-gradient border-top">
+  <div class="container-fluid">
+    <div class="ms-auto">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+       <!-- <small><a class="nav-link" href="https://techfolios.github.io">Made with Techfolios</a></small> -->
+      </ul>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  </body>
+</html>

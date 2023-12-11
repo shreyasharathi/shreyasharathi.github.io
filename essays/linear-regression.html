@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="title" content="Salary Patterns with Linear Regression | Shreyas Harathi | Professional Portfolio">
+    <meta name="description" content="">
+    <meta name="image" content="https://github.com/shreyasharathi.png">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Shreyas Harathi | Professional Portfolio">
+    <meta property="og:url" content="https://github.com/shreyasharathi/shreyasharathi.github.io/essays/linear-regression.html">
+    <meta property="og:title" content="Salary Patterns with Linear Regression | Shreyas Harathi | Professional Portfolio">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="https://github.com/shreyasharathi.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/techfolio-theme/skyblue.css">
+    <link rel="stylesheet" type="text/css" href="/css/rouge/github.css">
+    <!-- Load MathJax if 'mathjax: true' is found in your _config.yml. -->
+    
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+    
+
+    <title>Salary Patterns with Linear Regression | Shreyas Harathi | Professional Portfolio</title>
+  </head>
+  <body>
+  <header class="navbar navbar-expand navbar-light bg-light bg-gradient border-bottom">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Shreyas Harathi</a>
+    <div class="ms-auto">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <a class="nav-link" href="/#projects">Projects</a>
+       <a class="nav-link" href="/#essays">Blog</a>
+        <a class="nav-link" href="/resume.html">Resume</a>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<div class="container py-4">
+  <h1 class="display-4">Salary Patterns with Linear Regression</h1>
+  <span class="date">04 Dec 2023</span>
+  <hr>
+  <p>In this blog post, we’ll look into a salary dataset and employ linear regression to understand the relationship between years of experience and salary. Linear regression in machine learning is a supervised learning algorithm used for predicting a continuous outcome variable based on one or more input features. It establishes a linear relationship between the input features and the target variable by finding the best-fitting line through the data points.</p>
+
+<h2 id="the-dataset">The Dataset</h2>
+
+<p>Our dataset contains 30 entries of our two variables, Years of experience and Salary. Let’s load the dataset.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="err">'</span><span class="n">Salary_dataset</span><span class="p">.</span><span class="n">csv</span><span class="err">'</span><span class="p">)</span>
+<span class="n">df</span><span class="p">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img class="img-fluid" src="../img/linear-reg/lr_dataset.png" /></p>
+
+<p>We’ll clean our data by dropping unnecessary columns and checking for missing or duplicated values.</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># Drop the 'Unnamed: 0' column
+</span><span class="n">df</span><span class="p">.</span><span class="n">drop</span><span class="p">(</span><span class="err">'</span><span class="n">Unnamed</span><span class="o">:</span> <span class="mi">0</span><span class="err">'</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="n">True</span><span class="p">)</span>
+<span class="cp"># Check for Null values
+</span><span class="n">df</span><span class="p">.</span><span class="n">isna</span><span class="p">().</span><span class="n">sum</span><span class="p">()</span>
+<span class="cp"># Check for Duplicated values
+</span><span class="n">df</span><span class="p">.</span><span class="n">duplicated</span><span class="p">().</span><span class="n">sum</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h2 id="exploratory-data-analysis-eda">Exploratory Data Analysis (EDA)</h2>
+
+<p>To gain insights into the dataset, we’ll compute correlations and create visualizations, such as pair plots and scatter plots.</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="cp"># Compute the correlation matrix
+</span><span class="n">correlation_matrix</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">corr</span><span class="p">()</span>
+<span class="n">sns</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">font_scale</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">sns</span><span class="p">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mi">10</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span>
+</code></pre></div></div>
+<p><img class="img-fluid" src="../img/linear-reg/lr_pairplot.png" width="50%" /></p>
+
+<h2 id="ml-models">ML Models</h2>
+<h3 id="1linear-regression">1.Linear Regression</h3>
+<p>Now, it’s time to build our linear regression model. We’ll split the data into training and testing sets, create the model, and fit it to the training data.</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># Prepare the data
+</span><span class="n">x</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="err">'</span><span class="n">YearsExperience</span><span class="err">'</span><span class="p">].</span><span class="n">values</span><span class="p">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="err">'</span><span class="n">Salary</span><span class="err">'</span><span class="p">].</span><span class="n">values</span><span class="p">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="cp"># Split the data into training and testing sets
+</span><span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+
+<span class="cp"># Create a linear regression model
+</span><span class="n">lr</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+
+<span class="cp"># Fit the model to the training data
+</span><span class="n">lr</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="visualization-of-regression-line">Visualization of Regression Line</h2>
+<p>Visualizing the regression line on our scatter plot will help us understand how well our model fits the data.</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># Visualize the regression line
+</span><span class="n">plt</span><span class="p">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">"Years of Experience"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">"Salary"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">lr</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s">"r"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">"Regression line"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">"Salary with Years of Experience"</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+<p><img class="img-fluid" src="../img/linear-reg/lr_output.png" width="50%" /></p>
+
+<h2 id="model-evaluation">Model Evaluation</h2>
+<p>To assess the performance of our model, we’ll calculate key metrics such as mean absolute error, mean squared error, and R-squared.</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># Make predictions on the test set
+</span><span class="n">y_preds</span> <span class="o">=</span> <span class="n">lr</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+
+<span class="cp"># Evaluate the model
+</span><span class="n">print</span><span class="p">(</span><span class="s">"Mean Absolute Error ="</span><span class="p">,</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_preds</span><span class="p">))</span>
+<span class="n">print</span><span class="p">(</span><span class="s">"Mean Squared Error ="</span><span class="p">,</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_preds</span><span class="p">))</span>
+<span class="n">print</span><span class="p">(</span><span class="s">"R-squared ="</span><span class="p">,</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_preds</span><span class="p">))</span>
+</code></pre></div></div>
+<p>Upon evaluation,
+Mean Absolute Error =  3856.3599427002528 <br />
+Mean Squared Error =  19646866.89869981 <br />
+R-squared =  0.9794041289245915</p>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>In conclusion, our exploration into the salary dataset using linear regression has provided valuable insights into the relationship between years of experience and salary.</p>
+
+<p>Source: <a href="https://github.com/shreyasharathi/shreyasharathi.github.io/blob/main/Notebooks/linear_regression.ipynb"><i class="large github icon "></i>linear-regression</a></p>
+
+</div>
+
+<footer class="navbar navbar-expand navbar-light bg-light bg-gradient border-top">
+  <div class="container-fluid">
+    <div class="ms-auto">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+       <!-- <small><a class="nav-link" href="https://techfolios.github.io">Made with Techfolios</a></small> -->
+      </ul>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  </body>
+</html>

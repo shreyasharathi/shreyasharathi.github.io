@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="title" content="Using Naive Bayes To Predict Poisonous Mushrooms | Shreyas Harathi | Professional Portfolio">
+    <meta name="description" content="">
+    <meta name="image" content="https://github.com/shreyasharathi.png">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Shreyas Harathi | Professional Portfolio">
+    <meta property="og:url" content="https://github.com/shreyasharathi/shreyasharathi.github.io/essays/probability.html">
+    <meta property="og:title" content="Using Naive Bayes To Predict Poisonous Mushrooms | Shreyas Harathi | Professional Portfolio">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="https://github.com/shreyasharathi.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/techfolio-theme/skyblue.css">
+    <link rel="stylesheet" type="text/css" href="/css/rouge/github.css">
+    <!-- Load MathJax if 'mathjax: true' is found in your _config.yml. -->
+    
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+    
+
+    <title>Using Naive Bayes To Predict Poisonous Mushrooms | Shreyas Harathi | Professional Portfolio</title>
+  </head>
+  <body>
+  <header class="navbar navbar-expand navbar-light bg-light bg-gradient border-bottom">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Shreyas Harathi</a>
+    <div class="ms-auto">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <a class="nav-link" href="/#projects">Projects</a>
+       <a class="nav-link" href="/#essays">Blog</a>
+        <a class="nav-link" href="/resume.html">Resume</a>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<div class="container py-4">
+  <h1 class="display-4">Using Naive Bayes To Predict Poisonous Mushrooms</h1>
+  <span class="date">05 Dec 2023</span>
+  <hr>
+  <p>In this blog post, we are going to predict if a mushroom is poisonous or not. We are going to apply naive bayes method, which is based on the bayes theorem in probability.</p>
+
+<h2 id="the-dataset">The Dataset</h2>
+<p>This dataset includes descriptions of hypothetical samples corresponding to 23 species of gilled mushrooms in the Agaricus and Lepiota Family Mushroom drawn from The Audubon Society Field Guide to North American Mushrooms in 1981. Each species can be identified as definitely edible, definitely poisonous, or of unknown edibility and not recommended. This latter class was combined with the poisonous one.<br />
+So there 2 classes. Poisonous and edible.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"mushrooms.csv"</span><span class="p">)</span>
+<span class="n">df</span><span class="p">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+<p><img class="img-fluid" src="../img/probability/prob_dataset.png" width="50%" /></p>
+
+<p>Let us visualize the distribution of edible and poisonous mushrooms using a pie chart</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">pie</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="err">'</span><span class="k">class</span><span class="err">'</span><span class="p">].</span><span class="n">value_counts</span><span class="p">(),</span> <span class="n">startangle</span> <span class="o">=</span> <span class="mi">90</span><span class="p">,</span> <span class="n">autopct</span> <span class="o">=</span> <span class="err">'</span><span class="o">%</span><span class="mf">.1</span><span class="n">f</span><span class="err">'</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="err">'</span><span class="n">Edible</span><span class="err">'</span><span class="p">,</span> <span class="err">'</span><span class="n">Poisonous</span><span class="err">'</span><span class="p">],</span> <span class="n">shadow</span> <span class="o">=</span> <span class="n">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+<p><img class="img-fluid" src="../img/probability/prob_pie.png" width="50%" /></p>
+
+<h2 id="encoding-data">Encoding Data</h2>
+
+<p>All columns are object. So we need to encode them. I am going to use Label Encoding for this.</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">le</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">:</span><span class="p">,</span> <span class="mi">1</span><span class="o">:</span><span class="p">].</span><span class="n">apply</span><span class="p">(</span><span class="n">le</span><span class="p">.</span><span class="n">fit_transform</span><span class="p">).</span><span class="n">values</span>
+<span class="n">le</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">le</span><span class="p">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+<span class="n">y</span><span class="p">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">len</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+<p>Now, we will spilt the dataset into test and training data.</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="ml-models">ML Models</h2>
+<h3 id="1-gaussian-naive-bayes">1. Gaussian Naive Bayes</h3>
+<p>Before we apply the GaussianNB method, we need to scale our data. Differences in the scales across input variables may increase the difficulty of the problem being modeled. So I am going to apply standard scaling. Standardization scales each input variable separately by subtracting the mean (called centering) and dividing by the standard deviation to shift the distribution to have a mean of zero and a standard deviation of one.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sc</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">sc</span><span class="p">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">sc</span><span class="p">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</code></pre></div></div>
+<p>Now we can go ahead and try to fit out data in out model.</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">classifier</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
+<span class="n">classifier</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">classifier</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</code></pre></div></div>
+<p>Using this model, we get accuracy score to be 0.92.</p>
+
+<p><img class="img-fluid" src="../img/probability/prob_confusion.png" width="50%" /></p>
+
+<p>The resulting plot provides insights into how confident the Naive Bayes classifier is when predicting whether a mushroom is poisonous. The x-axis represents the predicted probabilities, and the y-axis represents the frequency of occurrences at each probability level.</p>
+
+<p><img class="img-fluid" src="../img/probability/prob_prob.png" width="50%" /></p>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>In this blog post, we explored the GaussianNB model and achieved a score of 0.92 on our model. I do believe that other techniques might be more accurate in making the same predictions. I will update this blog when i try them out.</p>
+
+<p>Source: <a href="https://github.com/shreyasharathi/shreyasharathi.github.io/blob/main/Notebooks/mushroom-predictions.ipynb"><i class="large github icon "></i>mushrooms</a></p>
+
+</div>
+
+<footer class="navbar navbar-expand navbar-light bg-light bg-gradient border-top">
+  <div class="container-fluid">
+    <div class="ms-auto">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+       <!-- <small><a class="nav-link" href="https://techfolios.github.io">Made with Techfolios</a></small> -->
+      </ul>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  </body>
+</html>

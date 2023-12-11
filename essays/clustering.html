@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="title" content="K-Means Clustering | Shreyas Harathi | Professional Portfolio">
+    <meta name="description" content="">
+    <meta name="image" content="https://github.com/shreyasharathi.png">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Shreyas Harathi | Professional Portfolio">
+    <meta property="og:url" content="https://github.com/shreyasharathi/shreyasharathi.github.io/essays/clustering.html">
+    <meta property="og:title" content="K-Means Clustering | Shreyas Harathi | Professional Portfolio">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="https://github.com/shreyasharathi.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/techfolio-theme/skyblue.css">
+    <link rel="stylesheet" type="text/css" href="/css/rouge/github.css">
+    <!-- Load MathJax if 'mathjax: true' is found in your _config.yml. -->
+    
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+    
+
+    <title>K-Means Clustering | Shreyas Harathi | Professional Portfolio</title>
+  </head>
+  <body>
+  <header class="navbar navbar-expand navbar-light bg-light bg-gradient border-bottom">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Shreyas Harathi</a>
+    <div class="ms-auto">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <a class="nav-link" href="/#projects">Projects</a>
+       <a class="nav-link" href="/#essays">Blog</a>
+        <a class="nav-link" href="/resume.html">Resume</a>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<div class="container py-4">
+  <h1 class="display-4">K-Means Clustering</h1>
+  <span class="date">17 Nov 2023</span>
+  <hr>
+  <p>Clustering is a fundamental technique in the field of unsupervised machine learning, allowing us to discover hidden patterns and group similar data points together. One popular algorithm for clustering is K-Means, and in this blog post, we’ll walk through a hands-on example using the well-known Iris dataset.</p>
+
+<h2 id="the-dataset">The Dataset</h2>
+
+<p>The Iris dataset is a classic dataset in machine learning, often used for testing and learning purposes. It consists of 150 samples of iris flowers, each belonging to one of three species: setosa, versicolor, or virginica. The features include sepal length, sepal width, petal length, and petal width.</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># Load the data
+</span><span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+
+<span class="cp"># Display the data
+</span><span class="n">print</span><span class="p">(</span><span class="n">iris</span><span class="p">.</span><span class="n">DESCR</span><span class="p">)</span>
+</code></pre></div></div>
+<h2 id="standardization">Standardization</h2>
+<p>Before applying K-Means, we standardize the features. Standardization ensures that all features contribute equally to the distance computation, preventing one feature from dominating the others due to a difference in scale.</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">X_iris</span> <span class="o">=</span> <span class="n">iris</span><span class="p">.</span><span class="n">data</span>
+<span class="n">y_iris</span> <span class="o">=</span> <span class="n">iris</span><span class="p">.</span><span class="n">target</span>
+
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="p">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_iris</span><span class="p">)</span>
+</code></pre></div></div>
+<h2 id="ml-models">ML Models</h2>
+<h3 id="k-means-clustering">K-Means Clustering</h3>
+<p>In our example, we set the number of clusters (K) to 3 since we know that there are three species of iris in the dataset. The algorithm then groups the data points into three clusters based on their similarity.</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">kmeans</span><span class="p">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">)</span>
+<span class="n">y_kmeans</span> <span class="o">=</span> <span class="n">kmeans</span><span class="p">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="visualizing-the-data">Visualizing the Data</h2>
+<p>The true power of K-Means becomes apparent when we visualize the clustered data. The scatter plot showcases the distinct clusters, with different colors representing each cluster. Additionally, we mark the cluster centers with black ‘x’ markers.</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp"># Plot the clustered data
+</span><span class="n">plt</span><span class="p">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">[</span><span class="o">:</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X_scaled</span><span class="p">[</span><span class="o">:</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y_kmeans</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="err">'</span><span class="n">viridis</span><span class="err">'</span><span class="p">)</span>
+
+<span class="cp"># Plot the centers of the clusters
+</span><span class="n">centers</span> <span class="o">=</span> <span class="n">kmeans</span><span class="p">.</span><span class="n">cluster_centers_</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">centers</span><span class="p">[</span><span class="o">:</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">centers</span><span class="p">[</span><span class="o">:</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="err">'</span><span class="n">black</span><span class="err">'</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="sc">'x'</span><span class="p">)</span>
+</code></pre></div></div>
+<p><img class="img-fluid" src="../img/clustering/clustering_kmeans.png" width="40%" /></p>
+
+<p>To assess the performance of our clustering, we compare the results with the true labels of the Iris dataset. This step is crucial in real-world scenarios where the actual labels are known, helping us evaluate the effectiveness of the clustering algorithm.</p>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="p">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">[</span><span class="o">:</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X_scaled</span><span class="p">[</span><span class="o">:</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y_iris</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="err">'</span><span class="n">viridis</span><span class="err">'</span><span class="p">)</span>
+</code></pre></div></div>
+<p><img class="img-fluid" src="../img/clustering/clustering_true_labels.png" width="40%" /></p>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>In this blog post, we’ve explored the application of K-Means clustering on the Iris dataset. The code provided serves as a starting point for anyone looking to dive into clustering using a well-known dataset.</p>
+
+<p>Source: <a href="https://github.com/shreyasharathi/shreyasharathi.github.io/blob/main/Notebooks/kmeans.ipynb"><i class="large github icon "></i>k-means</a></p>
+
+</div>
+
+<footer class="navbar navbar-expand navbar-light bg-light bg-gradient border-top">
+  <div class="container-fluid">
+    <div class="ms-auto">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+       <!-- <small><a class="nav-link" href="https://techfolios.github.io">Made with Techfolios</a></small> -->
+      </ul>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  </body>
+</html>

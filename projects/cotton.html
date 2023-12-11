@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="title" content="Implementation of Overload Scheduling Algorithms in FreeRTOS | Shreyas Harathi | Professional Portfolio">
+    <meta name="description" content="">
+    <meta name="image" content="https://github.com/shreyasharathi.png">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Shreyas Harathi | Professional Portfolio">
+    <meta property="og:url" content="https://github.com/shreyasharathi/shreyasharathi.github.io/projects/cotton.html">
+    <meta property="og:title" content="Implementation of Overload Scheduling Algorithms in FreeRTOS | Shreyas Harathi | Professional Portfolio">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="https://github.com/shreyasharathi.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/techfolio-theme/skyblue.css">
+    <link rel="stylesheet" type="text/css" href="/css/rouge/github.css">
+    <!-- Load MathJax if 'mathjax: true' is found in your _config.yml. -->
+    
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+    
+
+    <title>Implementation of Overload Scheduling Algorithms in FreeRTOS | Shreyas Harathi | Professional Portfolio</title>
+  </head>
+  <body>
+  <header class="navbar navbar-expand navbar-light bg-light bg-gradient border-bottom">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Shreyas Harathi</a>
+    <div class="ms-auto">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <a class="nav-link" href="/#projects">Projects</a>
+       <a class="nav-link" href="/#essays">Blog</a>
+        <a class="nav-link" href="/resume.html">Resume</a>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<div class="container py-4">
+  <h1 class="display-4">Implementation of Overload Scheduling Algorithms in FreeRTOS</h1>
+ <p><img class="img-fluid" src="../img/cotton/freertos.png" /></p>
+
+<p>Designed a custom scheduler to implement the RMS and DMS (pre-emptive) scheduling algorithm in C based on FreeRTOS.</p>
+
+<p>The summary of the algorithms and implementation is as follows:</p>
+
+<h3> Rate Monotonic Scheduling </h3>
+<p>RMS is a priority-based scheduling algorithm used to schedule periodic real-time tasks. It assigns priorities to tasks based on their periods, with shorter periods assigned higher priorities. The fundamental principle of RMS is that tasks with shorter periods have higher priority and are scheduled before tasks with longer periods. This algorithm assumes that the execution times of tasks are known and constant.</p>
+
+<p>Key features of RMS:</p>
+<ul>
+  <li>Priority assignment based on task periods.</li>
+  <li>Fixed-priority scheduling.</li>
+  <li>Assumes deterministic task execution times.</li>
+  <li>Preemptive scheduling (higher priority tasks can preempt lower priority tasks).</li>
+  <li>Guarantees the schedulability of a set of tasks if their total utilization is less than a certain threshold (around 69%).</li>
+</ul>
+
+<h3> Deadline Monotonic Scheduling </h3>
+<p>Deadline Monotonic Scheduling (DMS):
+DMS is also a priority-based scheduling algorithm used for real-time systems. Like RMS, it assigns priorities to tasks based on their deadlines. However, unlike RMS, DMS does not assume deterministic execution times. Instead, it focuses on meeting task deadlines, considering the worst-case execution time.
+Key features of DMS:</p>
+
+<ul>
+  <li>Priority assignment based on task deadlines.</li>
+  <li>Fixed-priority scheduling.</li>
+  <li>Considers worst-case execution times.</li>
+  <li>Preemptive scheduling.</li>
+  <li>Guarantees the schedulability of a set of tasks if their total utilization is less than a certain threshold (around 100%).</li>
+</ul>
+
+<h4>Priority assignment is carried out in the following way </h4>
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="kt">void</span> <span class="nf">prvSetFixedPriorities</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">BaseType_t</span> <span class="n">xIter</span><span class="p">,</span> <span class="n">xIndex</span><span class="p">;</span>
+	<span class="n">TickType_t</span> <span class="n">xShortest</span><span class="p">,</span> <span class="n">xPreviousShortest</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="n">SchedTCB_t</span><span class="o">*</span> <span class="n">pxShortestTaskPointer</span><span class="p">,</span> <span class="o">*</span> <span class="n">pxTCB</span><span class="p">;</span>
+
+<span class="cp">#if (schedUSE_SCHEDULER_TASK == 1)
+</span>	<span class="n">BaseType_t</span> <span class="n">xHighestPriority</span> <span class="o">=</span> <span class="n">schedSCHEDULER_PRIORITY</span><span class="p">;</span>
+<span class="cp">#else
+</span>	<span class="n">BaseType_t</span> <span class="n">xHighestPriority</span> <span class="o">=</span> <span class="n">configMAX_PRIORITIES</span><span class="p">;</span>
+<span class="cp">#endif </span><span class="cm">/* schedUSE_SCHEDULER_TASK */</span><span class="cp">
+</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">xIter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">xIter</span> <span class="o">&lt;</span> <span class="n">xTaskCounter</span><span class="p">;</span> <span class="n">xIter</span><span class="o">++</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">xShortest</span> <span class="o">=</span> <span class="n">portMAX_DELAY</span><span class="p">;</span>
+
+		<span class="cm">/* search for shortest period */</span>
+		<span class="k">for</span> <span class="p">(</span><span class="n">xIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">xIndex</span> <span class="o">&lt;</span> <span class="n">xTaskCounter</span><span class="p">;</span> <span class="n">xIndex</span><span class="o">++</span><span class="p">)</span>
+		<span class="p">{</span>
+			<span class="cm">/* your implementation goes here */</span>
+			<span class="k">if</span> <span class="p">(</span><span class="n">xTCBArray</span><span class="p">[</span><span class="n">xIndex</span><span class="p">].</span><span class="n">xInUse</span> <span class="o">==</span> <span class="n">pdFALSE</span><span class="p">)</span>
+				<span class="k">continue</span><span class="p">;</span>
+			<span class="k">if</span> <span class="p">(</span><span class="n">xTCBArray</span><span class="p">[</span><span class="n">xIndex</span><span class="p">].</span><span class="n">xPriorityIsSet</span> <span class="o">==</span> <span class="n">pdTRUE</span><span class="p">)</span>
+				<span class="k">continue</span><span class="p">;</span>
+
+		<span class="cp">#if (schedSCHEDULING_POLICY == schedSCHEDULING_POLICY_RMS)
+</span>			<span class="cm">/* your implementation goes here */</span>
+			<span class="k">if</span> <span class="p">(</span><span class="n">xShortest</span> <span class="o">&gt;</span> <span class="n">xTCBArray</span><span class="p">[</span><span class="n">xIndex</span><span class="p">].</span><span class="n">xPeriod</span><span class="p">)</span>
+			<span class="p">{</span>
+				<span class="n">xShortest</span> <span class="o">=</span> <span class="n">xTCBArray</span><span class="p">[</span><span class="n">xIndex</span><span class="p">].</span><span class="n">xPeriod</span><span class="p">;</span>
+				<span class="n">pxShortestTaskPointer</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">xTCBArray</span><span class="p">[</span><span class="n">xIndex</span><span class="p">];</span>
+			<span class="p">}</span>
+		<span class="cp">#endif </span><span class="cm">/* schedSCHEDULING_POLICY */</span><span class="cp">
+</span>		<span class="cp">#if (schedSCHEDULING_POLICY == schedSCHEDULING_POLICY_DMS)
+</span>			<span class="k">if</span> <span class="p">(</span><span class="n">xShortest</span> <span class="o">&gt;</span> <span class="n">xTCBArray</span><span class="p">[</span><span class="n">xIndex</span><span class="p">].</span><span class="n">xRelativeDeadline</span><span class="p">)</span>
+			<span class="p">{</span>
+				<span class="n">xShortest</span> <span class="o">=</span> <span class="n">xTCBArray</span><span class="p">[</span><span class="n">xIndex</span><span class="p">].</span><span class="n">xRelativeDeadline</span><span class="p">;</span>
+				<span class="n">pxShortestTaskPointer</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">xTCBArray</span><span class="p">[</span><span class="n">xIndex</span><span class="p">];</span>
+			<span class="p">}</span>
+		<span class="cp">#endif </span><span class="cm">/* schedSCHEDULING_POLICY */</span><span class="cp">
+</span>		<span class="p">}</span>
+
+		<span class="cm">/* set highest priority to task with xShortest period (the highest priority is configMAX_PRIORITIES-1) */</span>
+
+		<span class="cm">/* your implementation goes here */</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">xShortest</span> <span class="o">!=</span> <span class="n">xPreviousShortest</span><span class="p">)</span>
+		<span class="p">{</span>
+			<span class="k">if</span> <span class="p">(</span><span class="n">xHighestPriority</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+			<span class="p">{</span>
+				<span class="n">xHighestPriority</span><span class="o">--</span><span class="p">;</span>
+			<span class="p">}</span>
+			<span class="k">else</span>
+			<span class="p">{</span>
+				<span class="n">xHighestPriority</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+		<span class="n">configASSERT</span><span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">xHighestPriority</span><span class="p">);</span>
+		<span class="n">pxShortestTaskPointer</span><span class="o">-&gt;</span><span class="n">uxPriority</span> <span class="o">=</span> <span class="n">xHighestPriority</span><span class="p">;</span>
+		<span class="n">pxShortestTaskPointer</span><span class="o">-&gt;</span><span class="n">xPriorityIsSet</span> <span class="o">=</span> <span class="n">pdTRUE</span><span class="p">;</span>
+		<span class="n">xPreviousShortest</span> <span class="o">=</span> <span class="n">xShortest</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+<span class="cp">#endif </span><span class="cm">/* schedSCHEDULING_POLICY */</span><span class="cp">
+</span></code></pre></div></div>
+
+<ul>
+  <li>The algorithm does not perform any schedulability test.</li>
+  <li>In the event that a job misses its deadline, it is suspended and runs as a new job at its next release time. In other words, the current (missed) instance of the task is dropped.</li>
+  <li>The code prints out relevant information to the serial monitor, e.g., which task is executing, if a task misses its deadline, etc.</li>
+  <li>If a job executes for more than its worst-case execution time (i.e., an execution overrun occurs), it is suspended until its next release time. Again, conceptually, this overrun job is dropped</li>
+  <li>xExtended_TCB is used to help with maintaining a list of per-task parameters.
+    <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="k">struct</span> <span class="nc">xExtended_TCB</span>
+<span class="p">{</span>
+  <span class="n">TaskFunction_t</span> <span class="n">pvTaskCode</span><span class="p">;</span>	  <span class="cm">/* Function pointer to the code that will be run periodically. */</span>
+  <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">pcName</span><span class="p">;</span>			  <span class="cm">/* Name of the task. */</span>
+  <span class="n">UBaseType_t</span> <span class="n">uxStackDepth</span><span class="p">;</span>	  <span class="cm">/* Stack size of the task. */</span>
+  <span class="kt">void</span><span class="o">*</span> <span class="n">pvParameters</span><span class="p">;</span>			  <span class="cm">/* Parameters to the task function. */</span>
+  <span class="n">UBaseType_t</span> <span class="n">uxPriority</span><span class="p">;</span>		  <span class="cm">/* Priority of the task. */</span>
+  <span class="n">TaskHandle_t</span><span class="o">*</span> <span class="n">pxTaskHandle</span><span class="p">;</span>	  <span class="cm">/* Task handle for the task. */</span>
+  <span class="n">TickType_t</span> <span class="n">xReleaseTime</span><span class="p">;</span>	  <span class="cm">/* Release time of the task. */</span>
+  <span class="n">TickType_t</span> <span class="n">xRelativeDeadline</span><span class="p">;</span> <span class="cm">/* Relative deadline of the task. */</span>
+  <span class="n">TickType_t</span> <span class="n">xAbsoluteDeadline</span><span class="p">;</span> <span class="cm">/* Absolute deadline of the task. */</span>
+  <span class="n">TickType_t</span> <span class="n">xPeriod</span><span class="p">;</span>			  <span class="cm">/* Task period. */</span>
+  <span class="n">TickType_t</span> <span class="n">xLastWakeTime</span><span class="p">;</span>	  <span class="cm">/* Last time stamp when the task was running. */</span>
+  <span class="n">TickType_t</span> <span class="n">xMaxExecTime</span><span class="p">;</span>	  <span class="cm">/* Worst-case execution time of the task. */</span>
+  <span class="n">TickType_t</span> <span class="n">xExecTime</span><span class="p">;</span>		  <span class="cm">/* Current execution time of the task. */</span>
+
+  <span class="n">BaseType_t</span> <span class="n">xWorkIsDone</span><span class="p">;</span> <span class="cm">/* pdFALSE if the job is not finished, pdTRUE if the job is finished. */</span>
+<span class="p">}</span> <span class="n">Sched_TCB</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>Source: <a href="https://github.com/shreyasharathi/rms-dms-scheduler"><i class="large github icon "></i>shreyasharathi/rms-dms-scheduler</a></p>
+
+</div>
+
+<footer class="navbar navbar-expand navbar-light bg-light bg-gradient border-top">
+  <div class="container-fluid">
+    <div class="ms-auto">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+       <!-- <small><a class="nav-link" href="https://techfolios.github.io">Made with Techfolios</a></small> -->
+      </ul>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  </body>
+</html>

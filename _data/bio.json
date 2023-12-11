@@ -1,0 +1,93 @@
+{
+  "basics": {
+    "name": "Shreyas Harathi",
+    "label": "Graduate Student",
+    "picture": "https://github.com/shreyasharathi.png",
+    "email": "shreyasharathi00@vt.edu",
+    "phone": "412-482-0336",
+    "website": "https://shreyasharathi.github.io",
+    "summary": "I am pursuing M.S. in Computer Engineering in the Department of Electrical and Computer Engineering at Virginia Tech. I expect to graduate in Spring, 2024.<br> I am currently a Research Assistant at the Center for Embedded Systems for Critical Applications working on incraesing the saftey of F1TENTH Autonomous Race Car",
+    "location": { "address": "815 Claytor Square", "postalCode": "24060", "city": "Blacksburg", "countryCode": "USA", "region": "Virginia" },
+    "profiles": [
+      { "network": "github", "username": "shreyasharathi", "url": "https://github.com/shreyasharathi/shreyasharathi.github.io" },
+      { "network": "linkedin", "username": "Shreyas Harathi", "url": "http://linkedin.com/in/shreyasharathi" }
+    ]
+  },
+  "interests": [
+    { "name": "Embedded Systems" },
+    { "name": "Computer Architecture" },
+    { "name": "Real time Systems" },
+    { "name": "Autonomous Driving" },
+    { "name": "Soccer" },
+    { "name": "Video Games" }
+  ],
+  "skills": [
+    {
+      "name": "Languages and Frameworks",
+      "keywords": [ "C", "C++", "Embedded C", "Python", "Assembly", "RISC-V" ]
+    },
+    {
+      "name": "Protocols",
+      "keywords": [ "I2C", "SPI", "UART", "USB", "BLE" ]
+    },
+    {
+      "name": "Microcontrollers and Boards",
+      "keywords": [ "Arduino", "Raspberry Pi", "Altera", "Xilinx", "STM32" ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Virginia Tech, Blacksburg, VA",
+      "area": "Computer Engineering (expected Spring, 2024)",
+      "studyType": "M.S.",
+      "startDate": "2022-08-26",
+      "endDate": "Present",
+      "courses": [ "Computer Architecture",
+                  "Linux Kernel Programming",
+                  "Applied Linear Systems",
+                  "Real Time Systems",
+                  "Cyber-Physical Systems"
+      ]
+    },
+        {
+      "institution": "SASTRA Deemed University, India",
+      "area": "Electronics and Commmunication Engineering",
+      "studyType": "B. Tech.",
+      "startDate": "2018-08-23",
+      "endDate": "2022-05-15",
+      "courses": [ "Microprocessors and Microcontrollers",
+                  "Embedded Systems Processing and Architectures",
+                  "Digital Signal Processing",
+                  "Digital VLSI Design",
+                  "Digital System Design"
+      ]
+    }
+  ],
+  "volunteer": [
+    {
+      "organization": "Center for Embedded Systems for Critical Applications",
+      "website": "https://vtechworks.lib.vt.edu/handle/10919/77458",
+      "position": "Software Developer",
+      "startDate": "2023-01-24",
+      "endDate": "Present",
+      "summary": "Junior developer for F1TENTH Autonomous Race Car",
+      "highlights": [
+        "Design collision avoidance framework for an autonomous vehicle based on F1TENTH libraries",
+        "Working towards increasing the safety of autonomous race cars"
+      ]
+    }
+  ],
+  "awards": [
+    {
+      "title": "Best Outgoing Student",
+      "date": "2022",
+      "awarder": "School of Electrical and Electronics Engineering, SASTRA Deemed University",
+      "summary": "Awarded the best graduating student by the department"
+    }
+  ],
+  "references": [
+    {
+      "name": "Available upon request"
+    }
+  ]
+}
