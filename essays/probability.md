@@ -72,3 +72,4 @@ The resulting plot provides insights into how confident the Naive Bayes classifi
 ## Conclusion
 In this blog post, we explored the GaussianNB model and achieved a score of 0.92 on our model. I do believe that other techniques might be more accurate in making the same predictions. I will update this blog when i try them out.
 
+Source: <a href="https://github.com/shreyasharathi/shreyasharathi.github.io/blob/main/Notebooks/mushroom-predictions.ipynb"><i class="large github icon "></i>mushrooms</a>
