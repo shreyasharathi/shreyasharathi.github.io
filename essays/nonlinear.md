@@ -136,6 +136,6 @@ plt.show()
 
 
 ## Conclusion
-Model 3 has the best R2 score but it is also far more complex than R1. This trade off must be considered while selecting a suitable model.
+Model 3 has the best R2 score but it is also far more complex than model 1. This trade off must be considered while selecting a suitable model.
 
 Source: <a href="https://github.com/shreyasharathi/shreyasharathi.github.io/blob/main/Notebooks/non-linear-regression.ipynb"><i class="large github icon "></i>non-linear-regression</a>
