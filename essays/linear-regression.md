@@ -4,7 +4,7 @@ type: essay
 title: "Salary Patterns with Linear Regression"
 # All dates must be YYYY-MM-DD format!
 date: 2023-12-04
-published: true
+published: false
 labels:
   - Linear Regression
 ---
