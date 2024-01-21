@@ -4,7 +4,7 @@ type: essay
 title: "Using Naive Bayes To Predict Poisonous Mushrooms"
 # All dates must be YYYY-MM-DD format!
 date: 2023-12-05
-published: true
+published: false
 labels:
   - Probability
   - Naive Bayes
