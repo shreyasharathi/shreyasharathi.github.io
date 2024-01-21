@@ -4,7 +4,7 @@ type: essay
 title: "Credit Card Fraud Detection"
 # All dates must be YYYY-MM-DD format!
 date: 2023-11-23
-published: true
+published: false
 labels:
   - Isolation Forest
   - Local Outlier Factor
