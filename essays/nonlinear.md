@@ -4,7 +4,7 @@ type: essay
 title: "Exploring Housing Data and Regression Models"
 # All dates must be YYYY-MM-DD format!
 date: 2023-11-05
-published: true
+published: false
 labels:
   - Non-Linear Regression
 ---
